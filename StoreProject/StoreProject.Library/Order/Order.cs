@@ -5,24 +5,25 @@ namespace StoreProject.Library.Order
 {
     public class Order : IOrder
     {
-        private string location;
-        private string customer;
-        private string dateAndTime;
+        private string _location;
+        private string _customer;
+        private int _cost;
 
         private IDictionary<Product, int> _currentOrder;
 
 
-        public Order(string location, string customer, string dateAndTime)
+        public Order(string location, string customer, int cost)
         {
-            Location = location;
-            Customer = customer;
-            DateAndTime = dateAndTime;
+            _location = location;
+            _customer = customer;
+            _cost = cost;
         }
 
 
-        public string Location { get => location; set => location = value; }
-        public string Customer { get => customer; set => customer = value; }
-        public string DateAndTime { get => dateAndTime; set => dateAndTime = value; }
+        public string Location => _location;
+        public string Customer => _customer;
+        public int Cost => _cost;
+
 
         public void AddToOrder(Product product, int amount)
         {

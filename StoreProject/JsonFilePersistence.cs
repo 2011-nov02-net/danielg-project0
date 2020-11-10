@@ -3,6 +3,7 @@ using System.Text.Json;
 using StoreProject.Library.Order;
 using System.IO;
 using StoreProject.Library;
+//using Newtonsoft.Json;
 
 namespace StoreProject
 {
@@ -31,7 +32,7 @@ namespace StoreProject
             }
             catch(IOException)
             {
-                return new Order("", "", "");
+                return new Order("", "", 0);
             }
 
 
@@ -63,6 +64,30 @@ namespace StoreProject
             string filePath = "../../../locationData.json";
             ///Convert the data from Order class into a Serialzed string
             string json = JsonSerializer.Serialize(data);
+
+
+            //Write the json data to the file at _filePath
+            //File.WriteAllText(filePath, json);
+            File.AppendAllText(filePath, json);
+        }
+
+
+        public void ReadLocation()
+        {
+            string filePath = "../../../locationData.json";
+            ///Convert the data from Order class into a Serialzed string
+            string json;
+           
+            try
+            {
+                json = ""; //JsonConvert
+            }
+            catch (IOException)
+            {
+                return;
+            }
+
+           
 
 
             //Write the json data to the file at _filePath

@@ -25,7 +25,7 @@ namespace StoreProject
 
                 var input = Console.ReadLine();
 
-                
+
                 //var order1 = new Order("a", "b", "c");
                 //Console.WriteLine(order1.Customer);
 
@@ -48,12 +48,12 @@ namespace StoreProject
 
                 IDictionary<string, int> InventoryDict = new Dictionary<string, int>()
                 {
-                    { prod.ProductName, 27 },
-                    { prodQ.ProductName, 15 },
-                    { prodM.ProductName, 10 },
-                    { prodC.ProductName, 25 }
+                    { prod.ProductName, 50 },
+                    { prodQ.ProductName, 35 },
+                    { prodM.ProductName, 19 },
+                    { prodC.ProductName, 60 }
                 };
-                string city = "Norwich";
+                string city = "New York";
                 Location loc = new Location(city, InventoryDict);
 
 
@@ -65,13 +65,7 @@ namespace StoreProject
 
 
 
-                
             }
-            
-
-            
-
-
         }
     }
 }

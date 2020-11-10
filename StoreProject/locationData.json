@@ -1,1 +1,19 @@
-{"City":"Boston","Inventory":{"Dumb Big Mac":22,"Dumb Quarter Pounder":24,"Dumb McFlurry":19,"Dumb CheeseBurger":38}}{"City":"Norwich","Inventory":{"Dumb Big Mac":27,"Dumb Quarter Pounder":15,"Dumb McFlurry":10,"Dumb CheeseBurger":25}}{"City":"Norwich","Inventory":{"Dumb Big Mac":27,"Dumb Quarter Pounder":15,"Dumb McFlurry":10,"Dumb CheeseBurger":25}}
+{
+  "City": "Boston",
+  "Inventory": {
+    "Dumb Big Mac": 22,
+    "Dumb Quarter Pounder": 24,
+    "Dumb McFlurry": 19,
+    "Dumb CheeseBurger": 38
+  }
+}
+{
+  "City": "Norwich",
+  "Inventory": {
+    "Dumb Big Mac": 27,
+    "Dumb Quarter Pounder": 15,
+    "Dumb McFlurry": 10,
+    "Dumb CheeseBurger": 25
+  }
+}
+{"City":"New York","Inventory":{"Dumb Big Mac":50,"Dumb Quarter Pounder":35,"Dumb McFlurry":19,"Dumb CheeseBurger":60}}

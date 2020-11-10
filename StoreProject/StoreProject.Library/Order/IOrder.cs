@@ -4,9 +4,9 @@ namespace StoreProject
     public interface IOrder
     {
 
-        public string Location { get; set; }
-        public string Customer { get; set; }
-        public string DateAndTime { get; set; }
+        public string Location { get; }
+        public string Customer { get; }
+        public int Cost { get; }
 
     }
 }
