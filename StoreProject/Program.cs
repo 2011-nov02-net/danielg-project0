@@ -47,6 +47,14 @@ namespace StoreProject
                 Location loc = new Location("New York", 29, 48, 84, 79);
                 Location loc1 = new Location("Boston", 74, 28, 64, 93);
 
+                loc.Orders.Add(1);
+                loc.Orders.Add(2);
+                loc.Orders.Add(3);
+
+                loc1.Orders.Add(11);
+                loc1.Orders.Add(21);
+                loc1.Orders.Add(31);
+
                 List<Location> locs = new List<Location>();
                 locs.Add(loc);
                 locs.Add(loc1);
@@ -56,8 +64,22 @@ namespace StoreProject
                 Console.ReadLine();
 
                 List<Location> locats = JsonFilePersistence.ReadLocation();
+
+                for (int i = 0; i < locats.Count - 1; i++)
+                {
+                    Location currLoc = locats[i];
+                    if (currLoc.City.Equals("New York")) {
+                        currLoc.Orders.Add(100);
+                    }
+                    
+                }
                 
                 Location locN = new Location("Norwich", 58, 39, 29, 22);
+
+                locN.Orders.Add(1);
+                locN.Orders.Add(2);
+                locN.Orders.Add(3);
+
                 locats.Add(locN);
 
                 JsonFilePersistence.WriteLocation(locats);
@@ -67,8 +89,7 @@ namespace StoreProject
 
 
 
-
-
+                
 
 
                 //var order1 = new Order("a", "b", "c");

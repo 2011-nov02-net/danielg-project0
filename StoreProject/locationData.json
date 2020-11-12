@@ -1,1 +1,1 @@
-[{"Mcflurry":79,"CheeseBurger":84,"QuarterPounder":48,"BigMac":29,"City":"New York"},{"Mcflurry":93,"CheeseBurger":64,"QuarterPounder":28,"BigMac":74,"City":"Boston"},{"Mcflurry":22,"CheeseBurger":29,"QuarterPounder":39,"BigMac":58,"City":"Norwich"}]
+[{"Mcflurry":79,"CheeseBurger":84,"QuarterPounder":48,"BigMac":29,"City":"New York","Orders":[1,2,3,100]},{"Mcflurry":93,"CheeseBurger":64,"QuarterPounder":28,"BigMac":74,"City":"Boston","Orders":[11,21,31]},{"Mcflurry":22,"CheeseBurger":29,"QuarterPounder":39,"BigMac":58,"City":"Norwich","Orders":[1,2,3]}]

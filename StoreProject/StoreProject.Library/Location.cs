@@ -15,12 +15,15 @@ namespace StoreProject.Library
         private int _quarterPounder;
         private int _cheeseBurger;
         private int _mcflurry;
+        private List<int> orders;
 
         public Location()
         {
             Console.WriteLine("Paramaterless Constructor");
         }
 
+
+        //Constructor to make new Locations
         public Location(string city, int macs, int qps, int burgers, int flurry)
         {
             City = city;
@@ -28,11 +31,8 @@ namespace StoreProject.Library
             QuarterPounder = qps;
             CheeseBurger = burgers;
             Mcflurry = flurry;
+            Orders = new List<int>();
         }
-
-        // This is shorthand syntax for getting the city/inventory
-        //   No curly braces are needed because there is no set only get
-        
 
 
         // These are the properties for the stock.
@@ -40,7 +40,10 @@ namespace StoreProject.Library
         public int CheeseBurger { get => _cheeseBurger; set => _cheeseBurger = value; }
         public int QuarterPounder { get => _quarterPounder; set => _quarterPounder = value; }
         public int BigMac { get => _bigMac; set => _bigMac = value; }
+        //Property to get and set the City.
         public string City { get => _city; set => _city = value; }
+        //Set/Access the List of Orders
+        public List<int> Orders { get => orders; set => orders = value; }
 
         public void OrderPlaced(IOrder order)
         {
