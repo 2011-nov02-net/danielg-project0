@@ -3,6 +3,7 @@ using System.Text.Json;
 using StoreProject.Library.Order;
 using System.IO;
 using StoreProject.Library;
+using System.Collections.Generic;
 //using Newtonsoft.Json;
 
 namespace StoreProject
@@ -13,6 +14,24 @@ namespace StoreProject
         
         public JsonFilePersistence()
         {
+        }
+
+
+        public void WriteStrings(List<string> words)
+        {
+            string filePath = "../../../wordData.json";
+            string json = JsonSerializer.Serialize(words);
+
+            File.WriteAllText(filePath, json);
+        }
+
+
+        public List<string> ReadStrings()
+        {
+            string filePath = "../../../wordData.json";
+            string json = File.ReadAllText(filePath);
+            List<string> words = JsonSerializer.Deserialize<List<string>>(json);
+            return words;
         }
 
         /// <summary>
@@ -64,7 +83,9 @@ namespace StoreProject
             string filePath = "../../../locationData.json";
             ///Convert the data from Order class into a Serialzed string
             string json = JsonSerializer.Serialize(data);
+            //Is this gonna work
 
+            //string json1 = Newtonsoft.Json.JsonConvert.SerializeObject<Location>(data);
 
             //Write the json data to the file at _filePath
             //File.WriteAllText(filePath, json);
@@ -72,7 +93,7 @@ namespace StoreProject
         }
 
 
-        public void ReadLocation()
+        public Location ReadLocation()
         {
             string filePath = "../../../locationData.json";
             ///Convert the data from Order class into a Serialzed string
@@ -80,19 +101,20 @@ namespace StoreProject
            
             try
             {
-                json = ""; //JsonConvert
+                json = File.ReadAllText(filePath);
             }
             catch (IOException)
             {
-                return;
+                IDictionary<string, int> invent = new Dictionary<string, int>();
+                return new Location("", 0,0,0,0);
             }
 
-           
+
+           // List<Location> locations = Newtonsoft.Json.JsonConvert.DeserializeObject<Location>(json);
 
 
-            //Write the json data to the file at _filePath
-            //File.WriteAllText(filePath, json);
-            File.AppendAllText(filePath, json);
+            
+            return new Location("", 0,0,0,0);
         }
     }
 }

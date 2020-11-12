@@ -9,22 +9,37 @@ namespace StoreProject.Library
     {
 
         //The inventory dictionary. This contains the products and the number in stock
-        private IDictionary<string, int> _inventory;
+        
         private string _city;
+        private int _bigMac;
+        private int _quarterPounder;
+        private int _cheeseBurger;
+        private int _mcflurry;
 
+        public Location()
+        {
+            Console.WriteLine("Paramaterless Constructor");
+        }
 
-
-        public Location(string city, IDictionary<string, int> inventory)
+        public Location(string city, int macs, int qps, int burgers, int flurry)
         {
             _city = city;
-            _inventory = inventory;
-
+            BigMac = macs;
+            QuarterPounder = qps;
+            CheeseBurger = burgers;
+            Mcflurry = flurry;
         }
 
         // This is shorthand syntax for getting the city/inventory
         //   No curly braces are needed because there is no set only get
         public string City => _city;
-        public IDictionary<string, int> Inventory => _inventory;
+
+
+        // These are the properties for the stock.
+        public int Mcflurry { get => _mcflurry; set => _mcflurry = value; }
+        public int CheeseBurger { get => _cheeseBurger; set => _cheeseBurger = value; }
+        public int QuarterPounder { get => _quarterPounder; set => _quarterPounder = value; }
+        public int BigMac { get => _bigMac; set => _bigMac = value; }
 
 
 

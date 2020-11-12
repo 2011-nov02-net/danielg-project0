@@ -11,6 +11,7 @@ namespace StoreProject
         static void Main(string[] args)
         {
             JsonFilePersistence JsonFilePersistence = new JsonFilePersistence();
+            XMLFilePersistence XMLFilePersistence = new XMLFilePersistence();
             while (true)
             {
                 Console.WriteLine("-----------------------------------------------");
@@ -24,6 +25,37 @@ namespace StoreProject
                 Console.WriteLine("Quit: (q)");
 
                 var input = Console.ReadLine();
+
+                List<string> words = new List<string>();
+                words.Add("word1");
+                words.Add("word2");
+                words.Add("word3");
+                JsonFilePersistence.WriteStrings(words);
+
+
+                Console.ReadLine();
+
+                List<string> retWords = JsonFilePersistence.ReadStrings();
+                retWords.Add("words4");
+
+                JsonFilePersistence.WriteStrings(retWords);
+
+                Console.WriteLine(retWords);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                 //var order1 = new Order("a", "b", "c");
@@ -46,24 +78,20 @@ namespace StoreProject
                 Product prodC = new Product("Dumb CheeseBurger", 1);
 
 
-                IDictionary<string, int> InventoryDict = new Dictionary<string, int>()
-                {
-                    { prod.ProductName, 50 },
-                    { prodQ.ProductName, 35 },
-                    { prodM.ProductName, 19 },
-                    { prodC.ProductName, 60 }
-                };
                 string city = "New York";
-                Location loc = new Location(city, InventoryDict);
+                //Location loc = new Location(city, InventoryDict);
 
 
                 // Put other methods like this (add order, add customer) into another file so i can just call the method
                 //      when the user wants that to happen.
-                JsonFilePersistence.WriteLocation(loc);
+                //JsonFilePersistence.WriteLocation(loc);
 
 
 
+                //JsonFilePersistence.ReadLocation();
 
+
+                //XMLFilePersistence.LocationToXML(loc);
 
             }
         }
