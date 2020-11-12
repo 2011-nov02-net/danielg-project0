@@ -26,30 +26,43 @@ namespace StoreProject
 
                 var input = Console.ReadLine();
 
-                List<string> words = new List<string>();
-                words.Add("word1");
-                words.Add("word2");
-                words.Add("word3");
-                JsonFilePersistence.WriteStrings(words);
+                //List<string> words = new List<string>();
+                //words.Add("word1");
+                //words.Add("word2");
+                //words.Add("word3");
+                //JsonFilePersistence.WriteStrings(words);
 
+
+                //Console.ReadLine();
+
+                //List<string> retWords = JsonFilePersistence.ReadStrings();
+                //retWords.Add("words4");
+
+                //JsonFilePersistence.WriteStrings(retWords);
+
+                //Console.WriteLine(retWords);
+
+                
+
+                Location loc = new Location("New York", 29, 48, 84, 79);
+                Location loc1 = new Location("Boston", 74, 28, 64, 93);
+
+                List<Location> locs = new List<Location>();
+                locs.Add(loc);
+                locs.Add(loc1);
+
+                JsonFilePersistence.WriteLocation(locs);
 
                 Console.ReadLine();
 
-                List<string> retWords = JsonFilePersistence.ReadStrings();
-                retWords.Add("words4");
+                List<Location> locats = JsonFilePersistence.ReadLocation();
+                
+                Location locN = new Location("Norwich", 58, 39, 29, 22);
+                locats.Add(locN);
 
-                JsonFilePersistence.WriteStrings(retWords);
+                JsonFilePersistence.WriteLocation(locats);
 
-                Console.WriteLine(retWords);
-
-
-
-
-
-
-
-
-
+                Console.WriteLine(locats);
 
 
 

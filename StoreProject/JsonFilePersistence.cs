@@ -78,7 +78,7 @@ namespace StoreProject
         }
 
 
-        public void WriteLocation(Location data)
+        public void WriteLocation(List<Location> data)
         {
             string filePath = "../../../locationData.json";
             ///Convert the data from Order class into a Serialzed string
@@ -88,12 +88,12 @@ namespace StoreProject
             //string json1 = Newtonsoft.Json.JsonConvert.SerializeObject<Location>(data);
 
             //Write the json data to the file at _filePath
-            //File.WriteAllText(filePath, json);
-            File.AppendAllText(filePath, json);
+            File.WriteAllText(filePath, json);
+            
         }
 
 
-        public Location ReadLocation()
+        public List<Location> ReadLocation()
         {
             string filePath = "../../../locationData.json";
             ///Convert the data from Order class into a Serialzed string
@@ -105,16 +105,16 @@ namespace StoreProject
             }
             catch (IOException)
             {
-                IDictionary<string, int> invent = new Dictionary<string, int>();
-                return new Location("", 0,0,0,0);
+               
+                return new List<Location>();
             }
 
 
-           // List<Location> locations = Newtonsoft.Json.JsonConvert.DeserializeObject<Location>(json);
+            List<Location> locations = JsonSerializer.Deserialize<List<Location>>(json);
 
 
-            
-            return new Location("", 0,0,0,0);
+
+            return locations;
         }
     }
 }
