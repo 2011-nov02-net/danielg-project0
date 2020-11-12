@@ -23,7 +23,7 @@ namespace StoreProject.Library
 
         public Location(string city, int macs, int qps, int burgers, int flurry)
         {
-            _city = city;
+            City = city;
             BigMac = macs;
             QuarterPounder = qps;
             CheeseBurger = burgers;
@@ -32,7 +32,7 @@ namespace StoreProject.Library
 
         // This is shorthand syntax for getting the city/inventory
         //   No curly braces are needed because there is no set only get
-        public string City => _city;
+        
 
 
         // These are the properties for the stock.
@@ -40,8 +40,7 @@ namespace StoreProject.Library
         public int CheeseBurger { get => _cheeseBurger; set => _cheeseBurger = value; }
         public int QuarterPounder { get => _quarterPounder; set => _quarterPounder = value; }
         public int BigMac { get => _bigMac; set => _bigMac = value; }
-
-
+        public string City { get => _city; set => _city = value; }
 
         public void OrderPlaced(IOrder order)
         {
