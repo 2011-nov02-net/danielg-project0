@@ -40,10 +40,13 @@ namespace StoreProject.Library
         public int CheeseBurger { get => _cheeseBurger; set => _cheeseBurger = value; }
         public int QuarterPounder { get => _quarterPounder; set => _quarterPounder = value; }
         public int BigMac { get => _bigMac; set => _bigMac = value; }
+
         //Property to get and set the City.
         public string City { get => _city; set => _city = value; }
+
         //Set/Access the List of Orders
         public List<int> Orders { get => orders; set => orders = value; }
+
 
         public void OrderPlaced(IOrder order)
         {
