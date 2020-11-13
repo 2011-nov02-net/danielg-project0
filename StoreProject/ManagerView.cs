@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using StoreProject.Library;
+using StoreProject.Library.Customer;
 
 namespace StoreProject
 {
@@ -9,10 +10,12 @@ namespace StoreProject
     {
 
         List<Location> locations = new List<Location>();
+        
 
         //In here(and customer view, I can set up initial state. )
         public ManagerView()
         {
+            //customers = DataHolderClass.
             locations = DataHolderClass.storeLocations;
             BeAManager();
         }
@@ -37,11 +40,13 @@ namespace StoreProject
                 if (input == "v")
                 {
                     // Print all locations
-                    Console.WriteLine("All of the Locations: ");
+                    Console.WriteLine("-------------");
+                    Console.WriteLine("Hello Manager");
                     foreach (var loc in locations)
                     {
-                        Console.WriteLine("Location: {0}", loc.City);
+                        loc.PrintCity();
                     };
+
                     // Let user view location orders or exit to all locations
                     Console.WriteLine("Type in a city to view past orders, or exit(x): ");
 
@@ -65,17 +70,43 @@ namespace StoreProject
              
                         
                     }
-                    else if (city == "new york")
+                    if (city == "new york")
+                    {
+                        Location result;
+                        try
+                        {
+                            result = (Location)(from l in locations where l.City == "New York" select l);
+                            var orders = result.Orders;
+                            foreach (var order in orders)
+                            {
+                                //Add function in Location class to print out order history
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("Location not found, Error Message: " + e.Message);
+                        }
+
+
+                    }
+                    if (city == "norwich")
                     {
                         Location result;
                         try
                         {
                             result = (Location)(from l in locations where l.City == "Boston" select l);
+                            var orders = result.Orders;
+                            foreach (var order in orders)
+                            {
+                                //Add function in Location class to print out order history
+                            }
                         }
-                        catch (Exception)
+                        catch (Exception e)
                         {
-                            Console.WriteLine("Location not found");
+                            Console.WriteLine("Location not found, Error Message: " + e.Message);
                         }
+
+
                     }
                 }
                 else if (input == "x")

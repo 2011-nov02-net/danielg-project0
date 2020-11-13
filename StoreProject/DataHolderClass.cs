@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using StoreProject.Library;
+using StoreProject.Library.Customer;
 
 namespace StoreProject
 {
@@ -9,9 +10,41 @@ namespace StoreProject
         static DataHolderClass()
         {
             AddLocations();
+            AddCustomers();
         }
 
         internal static List<Location> storeLocations = new List<Location>();
+        internal static List<Customer> customers = new List<Customer>();
+        internal static List<IOrder> orders = new List<IOrder>();
+
+
+
+
+        /// <summary>
+        /// Method to add initial state with customers. I am still going to have the option to add customers, but
+        ///     I want a way to sign in 
+        /// </summary>
+        internal static void AddCustomers()
+        {
+            Customer cust1 = new Customer("Joe", "Biden");
+            customers.Add(cust1);
+            Customer cust2 = new Customer("Donald", "Trump");
+            customers.Add(cust2);
+            Customer cust3 = new Customer("Barack", "Obama");
+            customers.Add(cust3);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

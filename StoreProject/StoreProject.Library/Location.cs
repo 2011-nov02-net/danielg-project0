@@ -60,6 +60,12 @@ namespace StoreProject.Library
         }
 
 
+        public void PrintCity()
+        {
+            Console.WriteLine("Dumb Mcdonalds in: " + City);
+        }
+
+
         //I will implement this later but for now it is not as important to getting the functionality done.
         //public void AddInventory(Product product, int amount)
         //{

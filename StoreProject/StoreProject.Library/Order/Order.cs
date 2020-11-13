@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using StoreProject.Library.Customer;
 
 namespace StoreProject.Library.Order
 {
@@ -10,19 +11,21 @@ namespace StoreProject.Library.Order
         /// </summary>
         private string _location;
         private string _customer;
-        private int _cost;
+        
         private IDictionary<Product, int> _currentOrder;
+        private int[] _amounts;
         private static int _orderNumberStatic = 100;
         private int _orderNumber;
 
         /// <summary>
         /// Constructor used to create an order
         /// </summary>
-        public Order(string location, string customer, int cost)
+        public Order(string location, Customer customer, int[] amounts)
         {
             Location = location;
             Customer = customer;
-            Cost = cost;
+            CurrentOrder = new Dictionary<Product, int>();
+            Amounts = amounts;
         }
 
         /// <summary>
@@ -36,11 +39,6 @@ namespace StoreProject.Library.Order
         public string Customer { get => _customer; set => _customer = value; }
 
         /// <summary>
-        /// Property to get or set the Cost of an order
-        /// </summary>
-        public int Cost { get => _cost; set => _cost = value; }
-
-        /// <summary>
         /// Property to get or set the Current Order
         /// </summary>
         public IDictionary<Product, int> CurrentOrder { get => _currentOrder; set => _currentOrder = value; }
@@ -50,10 +48,21 @@ namespace StoreProject.Library.Order
         /// </summary>
         public int OrderNumber { get => _orderNumber; set { _orderNumber = _orderNumberStatic++; } }
 
+        /// <summary>
+        /// Set the amounts of each product to buy
+        /// </summary>
+        public int[] Amounts { get => _amounts; set => _amounts = value; }
+
+        public Order MakeOrder()
+        {
+
+
+
+        }
 
         public void AddToOrder(Product product, int amount)
         {
-            //if ()
+            CurrentOrder.Add(product, amount);
         }
 
 

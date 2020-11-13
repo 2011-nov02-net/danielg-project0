@@ -8,30 +8,43 @@ namespace StoreProject.Library.Customer
         // Private fields to store data specific to the customer.
         private string _nameFirst;
         private string _nameLast;
-        private string _id;
+        private int _id;
+        private static int _idStatic = 001;
+        private List<IOrder> _pastOrders;
 
-        // Constructor giving Customer initial state of full name and an ID
-        public Customer(string firstName, string lastName, string ID)
+        /// <summary>
+        /// Constructor giving Customer initial state of full name and an ID. Plus
+        ///    initialize the pastOrders list.
+        /// </summary>
+        public Customer(string firstName, string lastName)
         {
             NameFirst = firstName;
             NameLast = lastName;
-            //Id = ID;
+            PastOrders = new List<IOrder>();
+            _idStatic++;
         }
-
 
         /// <summary>
         /// Public Properties to get the Name of the Customers
         /// </summary>
-        public string NameFirst { get => _nameFirst; set => value = _nameFirst; }
-        public string NameLast { get => _nameLast; set => value = _nameLast; }
+        public string NameLast { get => _nameLast; set => _nameLast = value; }
+        public string NameFirst { get => _nameFirst; set => _nameFirst = value; }
 
         /// <summary>
         /// Property using static field to increment the customer id
         /// </summary>
+        public int ID { get => _idStatic; set { _id = _idStatic++; } }
+
+        /// <summary>
+        /// Property to get or set the pastOrders list
+        /// </summary>
+        public List<IOrder> PastOrders { get => _pastOrders; set => _pastOrders = value; }
         
 
-        public IEnumerable<IOrder> OrderHistory { get ; set; }
-
+        public void printDetails()
+        {
+            Console.WriteLine("First Name: " + NameFirst + ", Last Name: " + NameLast + ", ID: " + ID.ToString());
+        }
 
 
         public void PlaceOrder()
