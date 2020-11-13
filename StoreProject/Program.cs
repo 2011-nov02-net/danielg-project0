@@ -13,10 +13,26 @@ namespace StoreProject
             JsonFilePersistence JsonFilePersistence = new JsonFilePersistence();
             while (true)
             {
-                Console.WriteLine("-----------------------------------------------");
-                Console.WriteLine("Welcome to Dumb McDonald's. Pick Up Orders Only");
-                Console.WriteLine("-----------------------------------------------");
-                Console.WriteLine("Would You Like To: ");
+                Console.WriteLine("-------------------------------");
+                Console.WriteLine("Welcome to Dumb McDonald's inc.");
+                Console.WriteLine("-------------------------------");
+                Console.WriteLine("Are You A: ");
+                Console.WriteLine("Manager: (m)");
+                Console.WriteLine("Customer: (c)");
+
+                var input = Console.ReadLine();
+
+                if (input == "m")
+                {
+                    ManagerView manView = new ManagerView();
+                }
+                else if (input == "c")
+                {
+
+                }
+
+
+                /*
                 Console.WriteLine("Place an Order: (o)");
                 Console.WriteLine("Create New Customer: (c)");
                 Console.WriteLine("Search for a Customer by Name: (sc)");
@@ -68,7 +84,7 @@ namespace StoreProject
                 //JsonFilePersistence.WriteLocation(locats);
 
                 Console.WriteLine(locats);
-
+                */
             }
         }
     }

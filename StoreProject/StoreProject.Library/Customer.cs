@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StoreProject.Library.Customer
 {
-    public class Customer : ICustomer
+    public class Customer 
     {
         // Private fields to store data specific to the customer.
         private string _nameFirst;
@@ -15,14 +15,20 @@ namespace StoreProject.Library.Customer
         {
             NameFirst = firstName;
             NameLast = lastName;
-            Id = ID;
+            //Id = ID;
         }
 
 
-        // Public Properties to get the value of the Customers
-        public string NameFirst { get { return _nameFirst; } set { value = _nameFirst; } }
-        public string NameLast { get { return _nameLast; } set { value = _nameLast; } }
-        public string Id { get { return _id; } set { value = _id; } }
+        /// <summary>
+        /// Public Properties to get the Name of the Customers
+        /// </summary>
+        public string NameFirst { get => _nameFirst; set => value = _nameFirst; }
+        public string NameLast { get => _nameLast; set => value = _nameLast; }
+
+        /// <summary>
+        /// Property using static field to increment the customer id
+        /// </summary>
+        
 
         public IEnumerable<IOrder> OrderHistory { get ; set; }
 

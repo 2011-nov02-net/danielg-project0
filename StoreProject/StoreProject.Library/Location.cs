@@ -8,49 +8,55 @@ namespace StoreProject.Library
     public class Location
     {
 
-        //The inventory dictionary. This contains the products and the number in stock
-        
+        /// <summary>
+        /// Private fields to store city, the inventory dictionary, and the list of orders.
+        /// </summary>
         private string _city;
-        private int _bigMac;
-        private int _quarterPounder;
-        private int _cheeseBurger;
-        private int _mcflurry;
-        private List<int> orders;
-
-        public Location()
-        {
-            Console.WriteLine("Paramaterless Constructor");
-        }
+        private Dictionary<Product, int> _inventory;
+        private List<IOrder> orders;
 
 
-        //Constructor to make new Locations
-        public Location(string city, int macs, int qps, int burgers, int flurry)
+        /// <summary>
+        /// Constructor to make new Locations
+        /// </summary>
+        public Location(string city, Dictionary<Product, int> inventory)
         {
             City = city;
-            BigMac = macs;
-            QuarterPounder = qps;
-            CheeseBurger = burgers;
-            Mcflurry = flurry;
-            Orders = new List<int>();
+            Inventory = inventory;
+            Orders = new List<IOrder>();
         }
 
 
-        // These are the properties for the stock.
-        public int Mcflurry { get => _mcflurry; set => _mcflurry = value; }
-        public int CheeseBurger { get => _cheeseBurger; set => _cheeseBurger = value; }
-        public int QuarterPounder { get => _quarterPounder; set => _quarterPounder = value; }
-        public int BigMac { get => _bigMac; set => _bigMac = value; }
-
-        //Property to get and set the City.
+        /// <summary>
+        /// Property to get and set the City.
+        /// </summary>
         public string City { get => _city; set => _city = value; }
 
-        //Set/Access the List of Orders
-        public List<int> Orders { get => orders; set => orders = value; }
+        /// <summary>
+        /// Property to get and set the inventory
+        /// </summary>
+        public Dictionary<Product, int> Inventory { get => _inventory; set => _inventory = value; }
+
+        /// <summary>
+        /// Property to get and set the Orders list
+        /// </summary>
+        public List<IOrder> Orders { get => orders; set => orders = value; }
+
 
 
         public void OrderPlaced(IOrder order)
         {
 
+        }
+
+
+        public void PrintOrderHistory()
+        {
+            foreach (var order in orders)
+            {
+                // Add function in order to print its details out.
+                
+            }
         }
 
 
