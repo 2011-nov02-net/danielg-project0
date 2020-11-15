@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreProject", "StoreProject.csproj", "{11101AA4-A79C-443F-B209-5A35F423D208}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreProject", "StoreProject.ConsoleApp\StoreProject.csproj", "{11101AA4-A79C-443F-B209-5A35F423D208}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreProject.Library", "StoreProject.Library\StoreProject.Library.csproj", "{A94FFB70-0464-4BE0-ADE5-8AFF16230E61}"
 EndProject
