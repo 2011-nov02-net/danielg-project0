@@ -348,3 +348,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+#Git ignore files that I want to add
+StoreProject/StoreProject.ConsoleApp/ConnectionString.cs
