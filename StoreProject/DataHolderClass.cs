@@ -14,7 +14,7 @@ namespace StoreProject
         }
 
         internal static List<Location> storeLocations = new List<Location>();
-        internal static List<Customer> customers = new List<Customer>();
+        internal static List<CustomerClass> customers = new List<CustomerClass>();
         internal static List<IOrder> orders = new List<IOrder>();
 
 
@@ -26,11 +26,11 @@ namespace StoreProject
         /// </summary>
         internal static void AddCustomers()
         {
-            Customer cust1 = new Customer("Joe", "Biden");
+            CustomerClass cust1 = new CustomerClass("Joe", "Biden");
             customers.Add(cust1);
-            Customer cust2 = new Customer("Donald", "Trump");
+            CustomerClass cust2 = new CustomerClass("Donald", "Trump");
             customers.Add(cust2);
-            Customer cust3 = new Customer("Barack", "Obama");
+            CustomerClass cust3 = new CustomerClass("Barack", "Obama");
             customers.Add(cust3);
 
         }

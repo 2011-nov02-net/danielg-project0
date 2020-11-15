@@ -6,7 +6,7 @@ namespace StoreProject
 {
     public class CustomerView
     {
-        List<Customer> customers = new List<Customer>();
+        List<CustomerClass> customers = new List<CustomerClass>();
         private int customerId;
         //In here, I can possibly set up initial state like get the customer ID which is helpful for orders and stuff
         // In the constructors, Ill probably call a function that basically handles all of the stuff a customer can
@@ -41,7 +41,7 @@ namespace StoreProject
                     var firstName = Console.ReadLine();
                     Console.WriteLine("Please Type Yor Last Name: ");
                     var lastName = Console.ReadLine();
-                    Customer newCust = new Customer(firstName, lastName);
+                    CustomerClass newCust = new CustomerClass(firstName, lastName);
                     DataHolderClass.customers.Add(newCust);
 
                     //Divert control to the account made block below

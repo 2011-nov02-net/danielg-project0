@@ -3,25 +3,25 @@ using System.Collections.Generic;
 
 namespace StoreProject.Library.Customer
 {
-    public class Customer 
+    public class CustomerClass 
     {
         // Private fields to store data specific to the customer.
         private string _nameFirst;
         private string _nameLast;
-        private int _id;
-        private static int _idStatic = 001;
         private List<IOrder> _pastOrders;
+        private List<Product> _shoppingCart;
+
 
         /// <summary>
         /// Constructor giving Customer initial state of full name and an ID. Plus
         ///    initialize the pastOrders list.
         /// </summary>
-        public Customer(string firstName, string lastName)
+        public CustomerClass(string firstName, string lastName)
         {
             NameFirst = firstName;
             NameLast = lastName;
             PastOrders = new List<IOrder>();
-            _idStatic++;
+            
         }
 
         /// <summary>
@@ -30,20 +30,20 @@ namespace StoreProject.Library.Customer
         public string NameLast { get => _nameLast; set => _nameLast = value; }
         public string NameFirst { get => _nameFirst; set => _nameFirst = value; }
 
-        /// <summary>
-        /// Property using static field to increment the customer id
-        /// </summary>
-        public int ID { get => _idStatic; set { _id = _idStatic++; } }
 
         /// <summary>
         /// Property to get or set the pastOrders list
         /// </summary>
         public List<IOrder> PastOrders { get => _pastOrders; set => _pastOrders = value; }
-        
+
+        /// <summary>
+        /// Property to change or get the value of the shopping cart
+        /// </summary>
+        public List<Product> ShoppingCart { get => _shoppingCart; set => _shoppingCart = value; }
 
         public void printDetails()
         {
-            Console.WriteLine("First Name: " + NameFirst + ", Last Name: " + NameLast + ", ID: " + ID.ToString());
+            Console.WriteLine("First Name: " + NameFirst + ", Last Name: " + NameLast);
         }
 
 

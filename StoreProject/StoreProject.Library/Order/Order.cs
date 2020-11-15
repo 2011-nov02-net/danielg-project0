@@ -10,7 +10,7 @@ namespace StoreProject.Library.Order
         /// Private fields to store data pertaining to an order
         /// </summary>
         private string _location;
-        private string _customer;
+        private CustomerClass _customer;
         
         private IDictionary<Product, int> _currentOrder;
         private int[] _amounts;
@@ -20,7 +20,7 @@ namespace StoreProject.Library.Order
         /// <summary>
         /// Constructor used to create an order
         /// </summary>
-        public Order(string location, Customer customer, int[] amounts)
+        public Order(string location, CustomerClass customer, int[] amounts)
         {
             Location = location;
             Customer = customer;
@@ -36,7 +36,7 @@ namespace StoreProject.Library.Order
         /// <summary>
         /// Property to get or set the customer of an order
         /// </summary>
-        public string Customer { get => _customer; set => _customer = value; }
+        public CustomerClass Customer { get => _customer; set => _customer = value; }
 
         /// <summary>
         /// Property to get or set the Current Order
@@ -52,13 +52,8 @@ namespace StoreProject.Library.Order
         /// Set the amounts of each product to buy
         /// </summary>
         public int[] Amounts { get => _amounts; set => _amounts = value; }
+        
 
-        public Order MakeOrder()
-        {
-
-
-
-        }
 
         public void AddToOrder(Product product, int amount)
         {
