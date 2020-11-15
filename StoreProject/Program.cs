@@ -8,7 +8,7 @@ namespace StoreProject
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             //JsonFilePersistence JsonFilePersistence = new JsonFilePersistence();
 
@@ -30,6 +30,10 @@ namespace StoreProject
                 else if (input == "c")
                 {
                     CustomerView custView = new CustomerView();
+                }
+                else if (input == "x") 
+                {
+                    break;
                 }
 
 
