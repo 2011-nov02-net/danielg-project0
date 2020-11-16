@@ -15,7 +15,7 @@ namespace StoreProject
 
         // Set the count of customers field to 0 so I can use logic to see
         //      if it has been set or not
-        private int customerId = 0;
+        private CustomerClass currentCustomer;
 
         /// <summary>
         /// Creating the field that I will assign the Customer Repository
@@ -114,14 +114,17 @@ namespace StoreProject
                         Console.WriteLine("Please Enter a Valid ID: ");
                         id = Console.ReadLine();
                     }
-                    //MAYBE ONCE THIS PASSES, I SET THE CUSTOMER ID field that is IN THIS CLASS FOR USE IN THE "LOGGED IN" SECTION
+
+                    // Set the "logged in" customer based on what the user provided as id
+                    currentCustomer = cusRepo.GetCustomerFromID(iDInt);
                     // Divert control to the found block below
                     input = "found";
 
                 }
-                if (input == "made" || input == "found")
+                if (input == "found")
                 {
-                    Console.WriteLine("-------------------");
+                    Console.WriteLine("-------------------------------");
+                    Console.WriteLine($"Welcome {currentCustomer.Name}!!");
                     Console.WriteLine("Would You Like To: ");
                     Console.WriteLine("Place an Order: (p)");
                     Console.WriteLine("View Your Order History: (v)");

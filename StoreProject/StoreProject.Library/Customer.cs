@@ -7,7 +7,7 @@ namespace StoreProject.Library.Customer
     {
         // Private fields to store data specific to the customer.
         private string fullName;
-        private List<IOrder> _pastOrders;
+        private List<int> _pastOrders;
         private Dictionary<Product, int> shoppingCart;
 
 
@@ -19,24 +19,25 @@ namespace StoreProject.Library.Customer
         public CustomerClass(string name)
         {
             Name = name;
-            PastOrders = new List<IOrder>();
+            PastOrders = new List<int>();
         }
 
         /// <summary>
         /// Constructor to use when creating customers from the database.
-        /// The database is what gives them the ID
+        ///     The database is what gives them the ID
         /// </summary>
         public CustomerClass(string name, int id)
         {
             Name = name;
             Id = id;
+            PastOrders = new List<int>();
         }
 
 
         /// <summary>
         /// Property to get or set the pastOrders list
         /// </summary>
-        public List<IOrder> PastOrders { get => _pastOrders; set => _pastOrders = value; }
+        public List<int> PastOrders { get => _pastOrders; set => _pastOrders = value; }
 
         /// <summary>
         /// Property to change or get the value of the shopping cart

@@ -45,6 +45,7 @@ namespace StoreProject
             while (true)
             {
                 //list out all of the locations
+                Console.WriteLine("-------------------");
                 Console.WriteLine("Would you like to: ");
                 Console.WriteLine("View all Store Locations: (v)");
                 Console.WriteLine("Exit to Main Screen: (x)");

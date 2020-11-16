@@ -64,6 +64,19 @@ namespace StoreProjectDB.DataModel
         }
 
 
+        public CustomerClass GetCustomerFromID(int id)
+        {
+            // Create Context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Find the database entry for the specific Customer
+            var customer = context.Customers.Find(id);
+            // Create the Console Customer from the database customer
+            CustomerClass appCustomer = new CustomerClass(customer.Name, customer.Id);
+
+            return appCustomer;
+        }
+
+
 
 
 
