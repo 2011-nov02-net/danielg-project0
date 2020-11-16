@@ -12,14 +12,14 @@ namespace StoreProject.Library
         /// Private fields to store city, the inventory dictionary, and the list of orders.
         /// </summary>
         private string _city;
-        private Dictionary<Product, int> _inventory;
+        private Dictionary<string, int> _inventory;
         private List<IOrder> orders;
 
 
         /// <summary>
         /// Constructor to make new Locations
         /// </summary>
-        public Location(string city, Dictionary<Product, int> inventory)
+        public Location(string city, Dictionary<string, int> inventory)
         {
             City = city;
             Inventory = inventory;
@@ -42,7 +42,7 @@ namespace StoreProject.Library
         /// <summary>
         /// Property to get and set the inventory
         /// </summary>
-        public Dictionary<Product, int> Inventory { get => _inventory; set => _inventory = value; }
+        public Dictionary<string, int> Inventory { get => _inventory; set => _inventory = value; }
 
         /// <summary>
         /// Property to get and set the Orders list

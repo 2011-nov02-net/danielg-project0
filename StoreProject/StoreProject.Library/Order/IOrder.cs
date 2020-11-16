@@ -10,7 +10,7 @@ namespace StoreProject
 
         public string Location { get; set; }
         public CustomerClass Customer { get; set; }
-        public IDictionary<Product, int> CurrentOrder { get; set; }
+        public IDictionary<string, int> CurrentOrder { get; set; }
 
 
     }

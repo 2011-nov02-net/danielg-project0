@@ -78,26 +78,43 @@ namespace StoreProjectDB.DataModel
 
 
 
-        public Dictionary<Product, int> CreateStoreInventory(int storeID)
+        public Dictionary<string, int> CreateStoreInventory(int storeID)
         {
             // Create empty dictionary to fill in inventory
-            Dictionary<Product, int> inventory = new Dictionary<Product, int>();
+            Dictionary<string, int> inventory = new Dictionary<string, int>();
+            //SortedList<>
             // Create Context
             using var context = new danielGProj0DBContext(_contextOptions);
             // Get agg inventory items from the database- this is a stores inventory
-            var itemsInInventory = context.AggInventories.Where(i => i.StoreId == storeID);
+            var itemsInInventory = context.AggInventories.Where(i => i.StoreId == storeID).ToList();
+            // create console inventory with db inventory pieces
+            //var inven = itemsInInventory.Select(i => inventory.Add((string)i.Product, (int)i.InStock)).ToDictionary();
+            //var invent = itemsInInventory.Select(i => new Dictionary<string, int>() { i.Product, i.InStock });
 
+
+            Dictionary<string, int> inv = itemsInInventory.ToDictionary(i => i.Product, i => i.InStock);
+
+
+
+            return inv;
+        }
+
+
+        public List<StoreProject.Library.Product> GetProducts()
+        {
+            // Create context
+            using var context = new danielGProj0DBContext(_contextOptions);
             // Get the product names and prices- these two methods just make the "products"
             //  that are the key in the dictionary
             var dbProducts = context.Products.ToList();
             // Make the list of products into an a list of app products
             var appProducts = dbProducts.Select(p => new StoreProject.Library.Product(p.Name, p.Price)).ToList();
 
-            //Kind of second guessing my idea to use prodcut as the key in my dictionary
-            //  im just not sure how making it string would affect my app down the line, although
-            //      I feel like it wouldnt be dissatrous.
-
+            return appProducts;
         }
+
+
+
 
 
 

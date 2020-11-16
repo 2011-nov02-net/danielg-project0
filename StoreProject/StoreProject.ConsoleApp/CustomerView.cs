@@ -93,6 +93,10 @@ namespace StoreProject
                     //      It's just better to search by Primary Key(Id)
                     var id = Console.ReadLine();
 
+                    if (id == "x")
+                    {
+                        break;
+                    }
                     // Create ID as integer because it returns from the console as string
                     //   So i need to cast it in the try
                     int iDInt = 0;
@@ -107,6 +111,7 @@ namespace StoreProject
                         Console.WriteLine("Please Enter a Valid ID");
                         id = Console.ReadLine();
                     }
+                    
 
                     // If id is not in the range of customers, make customer enter again
                     if ((iDInt < 1) || (iDInt > count))
@@ -132,7 +137,10 @@ namespace StoreProject
                     var custChoice = Console.ReadLine();
                     if (custChoice == "p")
                     {
+                        Console.WriteLine("-------------------");
                         Console.WriteLine("Choose A Location: ");
+                        var location = Console.ReadLine();
+                        var inventory = cusRepo.CreateStoreInventory(1);
 
                     }
                     if (custChoice == "v")

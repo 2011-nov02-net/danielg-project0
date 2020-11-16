@@ -12,7 +12,7 @@ namespace StoreProject.Library.Order
         private string _location;
         private CustomerClass _customer;
         
-        private IDictionary<Product, int> _currentOrder;
+        private IDictionary<string, int> _currentOrder;
         private int[] _amounts;
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace StoreProject.Library.Order
         {
             Location = location;
             Customer = customer;
-            CurrentOrder = new Dictionary<Product, int>();
+            CurrentOrder = new Dictionary<string, int>();
             Amounts = amounts;
         }
 
@@ -39,7 +39,7 @@ namespace StoreProject.Library.Order
         /// <summary>
         /// Property to get or set the Current Order
         /// </summary>
-        public IDictionary<Product, int> CurrentOrder { get => _currentOrder; set => _currentOrder = value; }
+        public IDictionary<string, int> CurrentOrder { get => _currentOrder; set => _currentOrder = value; }
 
         /// <summary>
         /// Set the amounts of each product to buy
@@ -48,7 +48,7 @@ namespace StoreProject.Library.Order
         
 
 
-        public void AddToOrder(Product product, int amount)
+        public void AddToOrder(string product, int amount)
         {
             CurrentOrder.Add(product, amount);
         }

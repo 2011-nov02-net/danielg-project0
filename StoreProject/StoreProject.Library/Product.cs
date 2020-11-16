@@ -11,7 +11,7 @@ namespace StoreProject.Library
         public Product(string productName, decimal? price)
         {
             ProductName = productName;
-            Price = price;
+            Price = (decimal)price;
         }
 
         // Public properties to get or set the value of the products
