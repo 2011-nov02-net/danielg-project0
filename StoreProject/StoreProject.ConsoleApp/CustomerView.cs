@@ -61,6 +61,8 @@ namespace StoreProject
                 }
                 if (input == "r")
                 {
+                    Console.WriteLine("--------------");
+                    Console.WriteLine("Find Your ID: ");
                     //make customers array
                     var customers = cusRepo.GetAllCustomers();
 
