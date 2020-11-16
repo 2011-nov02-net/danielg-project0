@@ -8,7 +8,7 @@ namespace StoreProject.Library.Customer
         // Private fields to store data specific to the customer.
         private string fullName;
         private List<int> _pastOrders;
-        private Dictionary<Product, int> shoppingCart;
+        private Dictionary<string, int> shoppingCart;
 
 
         /// <summary>
@@ -31,6 +31,7 @@ namespace StoreProject.Library.Customer
             Name = name;
             Id = id;
             PastOrders = new List<int>();
+            ShoppingCart = new Dictionary<string, int>();
         }
 
 
@@ -42,7 +43,7 @@ namespace StoreProject.Library.Customer
         /// <summary>
         /// Property to change or get the value of the shopping cart
         /// </summary>
-        public Dictionary<Product, int> ShoppingCart { get => shoppingCart; set => shoppingCart = value; }
+        public Dictionary<string, int> ShoppingCart { get => shoppingCart; set => shoppingCart = value; }
 
         /// <summary>
         /// Property to get or set the name of a customer.
@@ -57,9 +58,26 @@ namespace StoreProject.Library.Customer
         }
 
 
+        public bool addToCart(string productName, int amountDesired)
+        {
+            if (amountDesired > 10)
+            {
+                Console.WriteLine($"Too many {productName}'s");
+                return false;
+            }
+            else if (amountDesired < 0)
+            {
+                Console.WriteLine($"Please enter a valid number of {productName}'s");
+                return false;
+            }
+            ShoppingCart.Add(productName, amountDesired);
+            return true;
+        }
+
+
         public void PlaceOrder()
         {
-            throw new NotImplementedException();
+            
         }
 
         public IEnumerable<IOrder> RecallOrders(string id)

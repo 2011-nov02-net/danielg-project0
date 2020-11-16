@@ -114,6 +114,16 @@ namespace StoreProjectDB.DataModel
         }
 
 
+        public int GetNumberOfStores()
+        {
+            //Create Context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Count the number of entries in the stores table
+            var storeCount = context.Stores.Count();
+
+            return storeCount;
+        }
+
 
 
 

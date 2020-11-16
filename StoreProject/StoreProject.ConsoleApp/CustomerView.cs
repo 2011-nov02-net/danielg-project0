@@ -106,7 +106,7 @@ namespace StoreProject
                     {
                         iDInt = int.Parse(id);
                     }
-                    catch (InvalidCastException e)
+                    catch (InvalidCastException)
                     {
                         Console.WriteLine("Please Enter a Valid ID");
                         id = Console.ReadLine();
@@ -119,7 +119,7 @@ namespace StoreProject
                         Console.WriteLine("Please Enter a Valid ID: ");
                         id = Console.ReadLine();
                     }
-
+                    iDInt = int.Parse(id);
                     // Set the "logged in" customer based on what the user provided as id
                     currentCustomer = cusRepo.GetCustomerFromID(iDInt);
                     // Divert control to the found block below
@@ -128,6 +128,7 @@ namespace StoreProject
                 }
                 if (input == "found")
                 {
+                    // Customer "Signed in" Welcome Screen
                     Console.WriteLine("-------------------------------");
                     Console.WriteLine($"Welcome {currentCustomer.Name}!!");
                     Console.WriteLine("Would You Like To: ");
@@ -135,18 +136,64 @@ namespace StoreProject
                     Console.WriteLine("View Your Order History: (v)");
                     Console.WriteLine("Exit: (x)");
                     var custChoice = Console.ReadLine();
+                    // Customer chooses to place an order
                     if (custChoice == "p")
                     {
                         Console.WriteLine("-------------------");
                         Console.WriteLine("Choose A Location: ");
+                        // Ask Customer which store they want to place the order at(still need to print the list of stores)-------------
                         var location = Console.ReadLine();
-                        var inventory = cusRepo.CreateStoreInventory(1);
+                        int storeID = 0;
+                        int storeCount = cusRepo.GetNumberOfStores();
 
+                        try
+                        {
+                            storeID = int.Parse(location);
+                        }
+                        catch (InvalidCastException)
+                        {
+                            Console.WriteLine("Please Enter a Valid ID");
+                            location = Console.ReadLine();
+                        }
+
+                        if ((storeID < 1) || (storeID > storeCount))
+                        {
+                            Console.WriteLine("Please Enter a Valid ID: ");
+                            location = Console.ReadLine();
+                        }
+                        storeID = int.Parse(location);
+
+                        var inventory = cusRepo.CreateStoreInventory(storeID);
+                        // To Do ---------------------------------------------------------------------------------------------------------
+                        // Create console location.
+
+                        // Ask customer how many items they want of each item in stock
+                        foreach (var item in inventory)
+                        {
+                            while (true)
+                            {
+                                Console.WriteLine($"How many {item.Key}'s would you like? ");
+                                var desired = Console.ReadLine();
+                                int tryToParse;
+                                var desiredInt = int.TryParse(desired, out tryToParse);
+                                var worked = currentCustomer.addToCart(item.Key, tryToParse);
+                                if (worked == true)
+                                {
+                                    break;
+                                }
+                            }
+
+                            // Shopping cart is built as far as I can tell. Now make the console location
+                            //   with its inventory, iterate through to see if the amounts work, and place the order if yes.
+
+                        }
                     }
+                    // Customer chooses to view their order history
                     if (custChoice == "v")
                     {
 
                     }
+                    // Customer choooses to exit
                     if (custChoice == "x")
                     {
                         break;
@@ -156,8 +203,5 @@ namespace StoreProject
                 break;
             }
         }
-
-
-
     }
 }
