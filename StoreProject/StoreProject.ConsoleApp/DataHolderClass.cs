@@ -26,11 +26,11 @@ namespace StoreProject
         /// </summary>
         internal static void AddCustomers()
         {
-            CustomerClass cust1 = new CustomerClass("Joe", "Biden");
+            CustomerClass cust1 = new CustomerClass("Joe");
             customers.Add(cust1);
-            CustomerClass cust2 = new CustomerClass("Donald", "Trump");
+            CustomerClass cust2 = new CustomerClass("Donald");
             customers.Add(cust2);
-            CustomerClass cust3 = new CustomerClass("Barack", "Obama");
+            CustomerClass cust3 = new CustomerClass("Barack");
             customers.Add(cust3);
 
         }

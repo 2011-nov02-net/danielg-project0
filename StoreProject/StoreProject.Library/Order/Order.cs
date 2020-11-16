@@ -14,8 +14,6 @@ namespace StoreProject.Library.Order
         
         private IDictionary<Product, int> _currentOrder;
         private int[] _amounts;
-        private static int _orderNumberStatic = 100;
-        private int _orderNumber;
 
         /// <summary>
         /// Constructor used to create an order
@@ -42,11 +40,6 @@ namespace StoreProject.Library.Order
         /// Property to get or set the Current Order
         /// </summary>
         public IDictionary<Product, int> CurrentOrder { get => _currentOrder; set => _currentOrder = value; }
-
-        /// <summary>
-        /// Set the order number with the static amount so that it is incremented each new order
-        /// </summary>
-        public int OrderNumber { get => _orderNumber; set { _orderNumber = _orderNumberStatic++; } }
 
         /// <summary>
         /// Set the amounts of each product to buy

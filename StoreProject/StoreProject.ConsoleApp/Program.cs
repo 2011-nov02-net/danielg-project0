@@ -16,12 +16,10 @@ namespace StoreProject
         static DbContextOptions<danielGProj0DBContext> s_dbContextOptions;
         
 
-        
-
-        //static danielGProj0DBContext
-
         public static void Main(string[] args)
         {
+
+            // Setting up the dbConnection Options
             using var logStream = new StreamWriter("ef-logs.txt");
             var connectionString = ConnectionString._connectionString;
             var optionsBuilder = new DbContextOptionsBuilder<danielGProj0DBContext>();
@@ -29,16 +27,18 @@ namespace StoreProject
             optionsBuilder.UseSqlServer(connectionString);
             optionsBuilder.LogTo(logStream.Write, LogLevel.Information);
             s_dbContextOptions = optionsBuilder.Options;
-            
 
+            CustomerRepository cr = new CustomerRepository(s_dbContextOptions);
+            // Enter Program Execution
             while (true)
             {
                 Console.WriteLine("--------------------------");
                 Console.WriteLine("Welcome to Dumb McDonald's");
                 Console.WriteLine("--------------------------");
-                Console.WriteLine("Are You A: ");
+                Console.WriteLine("Are You: ");
                 Console.WriteLine("Manager: (m)");
                 Console.WriteLine("Customer: (c)");
+                Console.WriteLine("Exit (x)");
 
                 var input = Console.ReadLine();
 
@@ -48,29 +48,13 @@ namespace StoreProject
                 }
                 else if (input == "c")
                 {
-                    CustomerView custView = new CustomerView();
-                }
-                else if (input == "v")
-                {
-                    DisplayCustomers();
+                    CustomerView custView = new CustomerView(s_dbContextOptions);
                 }
                 else if (input == "x") 
                 {
                     break;
                 }
 
-            }
-        }
-
-        static void DisplayCustomers()
-        {
-            using var context = new danielGProj0DBContext(s_dbContextOptions);
-
-            IQueryable<Customer> customers = context.Customers;
-
-            foreach (var customer in customers)
-            {
-                Console.WriteLine($"{customer.Name} {customer.Id}");
             }
         }
     }

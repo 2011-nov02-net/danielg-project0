@@ -6,29 +6,31 @@ namespace StoreProject.Library.Customer
     public class CustomerClass 
     {
         // Private fields to store data specific to the customer.
-        private string _nameFirst;
-        private string _nameLast;
+        private string fullName;
         private List<IOrder> _pastOrders;
         private List<Product> _shoppingCart;
 
 
         /// <summary>
-        /// Constructor giving Customer initial state of full name and an ID. Plus
+        /// Constructor giving Customer initial state of full name. Plus
         ///    initialize the pastOrders list.
+        ///    Use this constructor when creating a Customer from the ConsoleApp
         /// </summary>
-        public CustomerClass(string firstName, string lastName)
+        public CustomerClass(string name)
         {
-            NameFirst = firstName;
-            NameLast = lastName;
+            Name = name;
             PastOrders = new List<IOrder>();
-            
         }
 
         /// <summary>
-        /// Public Properties to get the Name of the Customers
+        /// Constructor to use when creating customers from the database.
+        /// The database is what gives them the ID
         /// </summary>
-        public string NameLast { get => _nameLast; set => _nameLast = value; }
-        public string NameFirst { get => _nameFirst; set => _nameFirst = value; }
+        public CustomerClass(string name, int id)
+        {
+            Name = name;
+            Id = id;
+        }
 
 
         /// <summary>
@@ -41,9 +43,16 @@ namespace StoreProject.Library.Customer
         /// </summary>
         public List<Product> ShoppingCart { get => _shoppingCart; set => _shoppingCart = value; }
 
+        /// <summary>
+        /// Property to get or set the name of a customer.
+        /// </summary>
+        public string FullName { get => fullName; set => fullName = value; }
+        public string Name { get; }
+        public int Id { get; }
+
         public void printDetails()
         {
-            Console.WriteLine("First Name: " + NameFirst + ", Last Name: " + NameLast);
+            Console.WriteLine($"Name: ({Name}) ID: ({Id})");
         }
 
 

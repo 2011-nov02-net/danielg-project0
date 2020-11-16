@@ -13,4 +13,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StoreProject.Library\StoreProject.Library.csproj" />
+  </ItemGroup>
 </Project>
