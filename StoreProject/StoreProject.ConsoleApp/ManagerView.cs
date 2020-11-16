@@ -1,22 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using StoreProject.Library;
 using StoreProject.Library.Customer;
+using StoreProjectDB.DataModel;
 
 namespace StoreProject
 {
     public class ManagerView
     {
+        /// <summary>
+        /// Create a List field to fill with locations the manager can view
+        /// </summary>
+        List<Location> locations;
+        /// <summary>
+        /// Creating the field that I will assign the Manager Repository with
+        ///     Context options to
+        /// </summary>
+        private ManagerRepository manRepo;
 
-        List<Location> locations = new List<Location>();
         
 
-        //In here(and customer view, I can set up initial state. )
-        public ManagerView()
+        /// <summary>
+        /// Constructor passing in dbcontextoptions so I can create a Manager Repository
+        ///     and pass in the context options that I set up in the Main method
+        /// </summary>
+        public ManagerView(DbContextOptions<danielGProj0DBContext> contextOptions)
         {
-            //customers = DataHolderClass.
-            locations = DataHolderClass.storeLocations;
+
+            manRepo = new ManagerRepository(contextOptions);
+            
             BeAManager();
         }
 
@@ -41,12 +55,17 @@ namespace StoreProject
                 {
                     // Print all locations
                     Console.WriteLine("-------------");
-                    Console.WriteLine("Hello Manager");
-                    foreach (var loc in locations)
-                    {
-                        loc.PrintCity();
-                    };
+                    Console.WriteLine("Choose a Store: ");
 
+                    // Get list of stores from database
+                    var stores = manRepo.GetStores();
+                    // Iterate through store list and print out stores
+                    foreach (var store in stores)
+                    {
+                        store.PrintDetails();
+                    }
+
+                    Console.WriteLine("------------------------------------------------");
                     // Let user view location orders or exit to all locations
                     Console.WriteLine("Type in a city to view past orders, or exit(x): ");
 

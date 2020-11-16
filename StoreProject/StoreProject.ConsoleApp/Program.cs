@@ -28,7 +28,7 @@ namespace StoreProject
             optionsBuilder.LogTo(logStream.Write, LogLevel.Information);
             s_dbContextOptions = optionsBuilder.Options;
 
-            CustomerRepository cr = new CustomerRepository(s_dbContextOptions);
+
             // Enter Program Execution
             while (true)
             {
@@ -44,7 +44,7 @@ namespace StoreProject
 
                 if (input == "m")
                 {
-                    ManagerView manView = new ManagerView();
+                    ManagerView manView = new ManagerView(s_dbContextOptions);
                 }
                 else if (input == "c")
                 {

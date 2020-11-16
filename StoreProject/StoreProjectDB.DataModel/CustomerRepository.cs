@@ -8,8 +8,15 @@ namespace StoreProjectDB.DataModel
 {
     public class CustomerRepository
     {
+        /// <summary>
+        /// Create field for context options that will be set using the context options from
+        /// Program.cs -> Customer View -> right her
+        /// </summary>
         private readonly DbContextOptions<danielGProj0DBContext> _contextOptions;
 
+        /// <summary>
+        /// Constructor with context options parameter that gets passed from Customer View
+        /// </summary>
         public CustomerRepository(DbContextOptions<danielGProj0DBContext> contextOptions)
         {
             _contextOptions = contextOptions;
@@ -49,7 +56,7 @@ namespace StoreProjectDB.DataModel
         {
             // Create Context
             using var context = new danielGProj0DBContext(_contextOptions);
-
+            // Count the number of entries in customer table
             var custCount = context.Customers.Count();
 
             return custCount;

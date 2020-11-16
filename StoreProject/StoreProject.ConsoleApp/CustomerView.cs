@@ -8,16 +8,25 @@ namespace StoreProject
 {
     public class CustomerView
     {
+        /// <summary>
+        /// Create a list field to fill with the customers that have been created
+        /// </summary>
         List<CustomerClass> customers = new List<CustomerClass>();
-        private int customerId;
 
+        // Set the count of customers field to 0 so I can use logic to see
+        //      if it has been set or not
+        private int customerId = 0;
+
+        /// <summary>
+        /// Creating the field that I will assign the Customer Repository
+        ///     with context options to
+        /// </summary>
         private CustomerRepository cusRepo;
 
         /// <summary>
         /// Constructor passing in dbcontextoptions so I can create a Customer Repository
-        /// And pass in the context optoins that I set up in the Main method
+        ///     and pass in the context options that I set up in the Main method
         /// </summary>
-       
         public CustomerView(DbContextOptions<danielGProj0DBContext> contextOptions)
         {
             cusRepo = new CustomerRepository(contextOptions);
@@ -84,8 +93,11 @@ namespace StoreProject
                     //      It's just better to search by Primary Key(Id)
                     var id = Console.ReadLine();
 
+                    // Create ID as integer because it returns from the console as string
+                    //   So i need to cast it in the try
                     int iDInt = 0;
 
+                    // Try and cast the id, if it doesnt work catch the error.
                     try
                     {
                         iDInt = int.Parse(id);
@@ -96,19 +108,13 @@ namespace StoreProject
                         id = Console.ReadLine();
                     }
 
-
-
+                    // If id is not in the range of customers, make customer enter again
                     if ((iDInt < 1) || (iDInt > count))
                     {
-                        Console.WriteLine("Please Enter a Valid ID");
+                        Console.WriteLine("Please Enter a Valid ID: ");
                         id = Console.ReadLine();
                     }
-
-                    
-          
-                    
-
-
+                    //MAYBE ONCE THIS PASSES, I SET THE CUSTOMER ID field that is IN THIS CLASS FOR USE IN THE "LOGGED IN" SECTION
                     // Divert control to the found block below
                     input = "found";
 
@@ -123,7 +129,7 @@ namespace StoreProject
                     var custChoice = Console.ReadLine();
                     if (custChoice == "p")
                     {
-                        //Place an Order 
+                        
                     }
                     if (custChoice == "v")
                     {

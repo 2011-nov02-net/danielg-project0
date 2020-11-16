@@ -26,6 +26,13 @@ namespace StoreProject.Library
             Orders = new List<IOrder>();
         }
 
+        public Location(string location, int id)
+        {
+            CityLocation = location;
+            Id = id;
+
+        }
+
 
         /// <summary>
         /// Property to get and set the City.
@@ -41,6 +48,15 @@ namespace StoreProject.Library
         /// Property to get and set the Orders list
         /// </summary>
         public List<IOrder> Orders { get => orders; set => orders = value; }
+
+        /// <summary>
+        /// Generated property to set the city of a Store
+        /// </summary>
+        public string CityLocation { get; }
+        /// <summary>
+        /// Generated Property to set the ID of a store
+        /// </summary>
+        public int Id { get; }
 
 
 
@@ -60,9 +76,9 @@ namespace StoreProject.Library
         }
 
 
-        public void PrintCity()
+        public void PrintDetails()
         {
-            Console.WriteLine("Dumb Mcdonalds in: " + City);
+            Console.WriteLine($"Dumb Mcdonalds in: ({CityLocation}), StoreID: ({Id})");
         }
 
 

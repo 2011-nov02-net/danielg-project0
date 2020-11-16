@@ -8,7 +8,7 @@ namespace StoreProject.Library.Customer
         // Private fields to store data specific to the customer.
         private string fullName;
         private List<IOrder> _pastOrders;
-        private List<Product> _shoppingCart;
+        private Dictionary<Product, int> shoppingCart;
 
 
         /// <summary>
@@ -41,14 +41,14 @@ namespace StoreProject.Library.Customer
         /// <summary>
         /// Property to change or get the value of the shopping cart
         /// </summary>
-        public List<Product> ShoppingCart { get => _shoppingCart; set => _shoppingCart = value; }
+        public Dictionary<Product, int> ShoppingCart { get => shoppingCart; set => shoppingCart = value; }
 
         /// <summary>
         /// Property to get or set the name of a customer.
         /// </summary>
-        public string FullName { get => fullName; set => fullName = value; }
         public string Name { get; }
         public int Id { get; }
+        
 
         public void printDetails()
         {
