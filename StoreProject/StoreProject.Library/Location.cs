@@ -65,6 +65,10 @@ namespace StoreProject.Library
 
         }
 
+        public void createInventory(Dictionary<Product, int> inventory)
+        {
+
+        }
 
         public void PrintOrderHistory()
         {

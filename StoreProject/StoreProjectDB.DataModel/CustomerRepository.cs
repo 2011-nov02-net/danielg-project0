@@ -78,6 +78,29 @@ namespace StoreProjectDB.DataModel
 
 
 
+        public Dictionary<Product, int> CreateStoreInventory(int storeID)
+        {
+            // Create empty dictionary to fill in inventory
+            Dictionary<Product, int> inventory = new Dictionary<Product, int>();
+            // Create Context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Get agg inventory items from the database- this is a stores inventory
+            var itemsInInventory = context.AggInventories.Where(i => i.StoreId == storeID);
+
+            // Get the product names and prices- these two methods just make the "products"
+            //  that are the key in the dictionary
+            var dbProducts = context.Products.ToList();
+            // Make the list of products into an a list of app products
+            var appProducts = dbProducts.Select(p => new StoreProject.Library.Product(p.Name, p.Price)).ToList();
+
+            //Kind of second guessing my idea to use prodcut as the key in my dictionary
+            //  im just not sure how making it string would affect my app down the line, although
+            //      I feel like it wouldnt be dissatrous.
+
+        }
+
+
+
 
 
 

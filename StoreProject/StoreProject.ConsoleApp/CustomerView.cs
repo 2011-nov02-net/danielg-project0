@@ -132,7 +132,8 @@ namespace StoreProject
                     var custChoice = Console.ReadLine();
                     if (custChoice == "p")
                     {
-                        
+                        Console.WriteLine("Choose A Location: ");
+
                     }
                     if (custChoice == "v")
                     {
