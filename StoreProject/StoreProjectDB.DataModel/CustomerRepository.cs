@@ -75,12 +75,31 @@ namespace StoreProjectDB.DataModel
             // From here, see the last order to get the id and update the other tables
             int lastOrder = GetAmountOfGenOrders();
 
+            // Send the AggOrder of the products to the DB
             SendAggOrder(order, lastOrder);
+
+            // Update the inventory of the store that had a purchase
+            UpdateInventory(order);
+
         }
 
-        public void UpdateInventory()
+        public void UpdateInventory(IOrder order)
         {
+            // Create Context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Get agg inventory items from the database- this is a stores inventory
+            var itemsInInventory = context.AggInventories.Where(i => i.StoreId == order.Location.Id).ToList();
+            // Iterate over the items in the order
+            foreach (var item in order.Customer.ShoppingCart)
+            {
+                // Find the item in the list of items that are in stock at that store
+                //   then decrement based on the amount ordered
+                var currentItem = itemsInInventory.Find(x => x.Product == item.Key);
+                currentItem.InStock -= item.Value;
 
+            }
+            // Save changes made and send to DB
+            context.SaveChanges();
         }
 
         public void SendAggOrder(IOrder order, int orderID)
@@ -203,7 +222,6 @@ namespace StoreProjectDB.DataModel
         {
             // Create empty dictionary to fill in inventory
             Dictionary<string, int> inventory = new Dictionary<string, int>();
-            //SortedList<>
             // Create Context
             using var context = new danielGProj0DBContext(_contextOptions);
             // Get agg inventory items from the database- this is a stores inventory
