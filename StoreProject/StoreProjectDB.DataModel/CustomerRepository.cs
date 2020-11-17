@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using StoreProject.Library.Customer;
 using System.Linq;
 using StoreProject.Library;
+using StoreProject;
 
 namespace StoreProjectDB.DataModel
 {
@@ -50,6 +51,19 @@ namespace StoreProjectDB.DataModel
             // Add Customer to database and save change
             context.Customers.Add(dbCustomer);
             context.SaveChanges();
+        }
+
+        public void SendOrderToDB(IOrder order)
+        {
+            // Create context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Create a database GenOrder using info from the order passed into this method
+            GenOrder dbGeneralOrder = new GenOrder
+            {
+                CustomerId = order.Customer.Id,
+                StoreId = order.Location.Id,
+
+            };
         }
 
 
@@ -133,6 +147,11 @@ namespace StoreProjectDB.DataModel
             return appStores;
         }
 
+        /// <summary>
+        /// Create console app store, from the database. Complete with inventory.
+        /// </summary>
+        /// <param name="storeID"></param>
+        /// <returns></returns>
         public Location CreateStoreWithInventory(int storeID)
         {
             // Create empty dictionary to fill in inventory

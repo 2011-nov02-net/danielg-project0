@@ -50,14 +50,15 @@ namespace StoreProject.Library.Customer
         /// </summary>
         public string Name { get; }
         public int Id { get; }
-        
 
+
+        /// <summary>
+        /// Print customer details (Name and ID)
+        /// </summary>
         public void printDetails()
         {
             Console.WriteLine($"Name: ({Name}) ID: ({Id})");
         }
-
-
 
         /// <summary>
         /// I might want to put this logic in order eventually
@@ -78,11 +79,6 @@ namespace StoreProject.Library.Customer
             return true;
         }
 
-
-        public void PlaceOrder()
-        {
-            
-        }
 
         public IEnumerable<IOrder> RecallOrders(string id)
         {

@@ -41,6 +41,10 @@ namespace StoreProject
             BeACustomer();
         }
 
+        /// <summary>
+        /// Method that runs when a user picks to be a customer. Has all of the functionality for
+        ///     signing in/creating customer, placing orders, viewing past orders, etc.
+        /// </summary>
         public void BeACustomer()
         {
             Console.WriteLine("-------------");
@@ -153,6 +157,7 @@ namespace StoreProject
                         int storeID = 0;
                         int storeCount = cusRepo.GetNumberOfStores();
 
+                        // Try to parse the string taken from the customer into an int
                         try
                         {
                             storeID = int.Parse(location);
@@ -163,9 +168,10 @@ namespace StoreProject
                             location = Console.ReadLine();
                         }
 
+                        // If storeID that customer provides is not valid, make them re-enter it.
                         if ((storeID < 1) || (storeID > storeCount))
                         {
-                            Console.WriteLine("Please Enter a Valid ID: ");
+                            Console.WriteLine("Please Enter a Valid Store ID: ");
                             location = Console.ReadLine();
                         }
                         storeID = int.Parse(location);
@@ -177,6 +183,8 @@ namespace StoreProject
                         {
                             while (true)
                             {
+                                // For each item in stock, ask customer how many they want then add their choice to
+                                //      the customers cart.
                                 Console.WriteLine($"How many {item.Key}'s would you like? ");
                                 var desired = Console.ReadLine();
                                 int tryToParse;
@@ -188,31 +196,17 @@ namespace StoreProject
                                 }
                             }
                         }
-
+                        // Create the console app order so i can add a price send it to a location and
                         IOrder thisOrder = new Order(currentLocation, currentCustomer);
+                        // Get list of products so i can get the total cost of the order and set it
+                        List<StoreProject.Library.Product> products = cusRepo.GetProducts();
+                        // Set the total cost of the order using the list of products at the current time(Name, price)
+                        thisOrder.CalculateTotal(products);
 
-                        // Make sure the location inventory gets updated locally, then take the store
-                        //      And pass it to customer Repos so i can update the inventory for that store
-                        // Call orderplaces on the store, and I should be able to get back customer, invnetory, cost, time
-                        //    Send all that to the db and it will create a new orderid for me, theoretically
-
-                        // Print store inventory before placing order(TEMPPPPPPP)
-                        foreach (var item in currentLocation.Inventory)
-                        {
-                            Console.WriteLine($"ITEM: ({item.Key})---- IN STOCK: ({item.Value})");
-                        }
-
-                        // Place Order
+                        // Place Order at location
                         currentLocation.OrderPlaced(thisOrder);
 
-
-                        //Print store inventory after placing order(TEMPPPPPPP)
-                        foreach (var item in currentLocation.Inventory)
-                        {
-                            Console.WriteLine($"ITEM: ({item.Key})---- IN STOCK: ({item.Value})");
-                        }
-
-
+                        // Stop execution just for a minute(-----------TEMP----------------------)
                         Console.WriteLine("Pause");
                         var read = Console.ReadLine();
 

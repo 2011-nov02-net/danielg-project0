@@ -12,6 +12,7 @@ namespace StoreProject.Library.Order
         private Location _location;
         private CustomerClass _customer;
         private DateTime date;
+        private decimal cost;
 
         private IDictionary<string, int> _currentOrder;
 
@@ -42,11 +43,16 @@ namespace StoreProject.Library.Order
         /// </summary>
         public DateTime Date { get => date; set => date = value; }
 
+        /// <summary>
+        /// Property to get or set the cost of the order
+        /// </summary>
+        public decimal Cost { get => cost; set => cost = value; }
+
 
         /// <summary>
         /// Calculate the total of an order, pass in the list of prodcuts from the database
         /// </summary>
-        public decimal CalculateTotal(List<Product> products)
+        public void CalculateTotal(List<Product> products)
         {
             decimal orderTotal = 0.00M;
             // Get a dictionary of products and prices and get a dictionary of currentorder
@@ -62,8 +68,8 @@ namespace StoreProject.Library.Order
                 // Add the total of 
                 orderTotal += (priceOfProduct *= product.Value);
             }
-
-            return orderTotal;
+            // Set the cost in this class to the sum of all of the products and prices
+            Cost = orderTotal;
         }
 
 

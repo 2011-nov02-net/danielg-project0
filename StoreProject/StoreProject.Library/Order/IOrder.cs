@@ -12,6 +12,8 @@ namespace StoreProject
         public CustomerClass Customer { get; set; }
         //public IDictionary<string, int> CurrentOrder { get; set; }
 
+        public void CalculateTotal(List<Product> products);
+
 
     }
 }
