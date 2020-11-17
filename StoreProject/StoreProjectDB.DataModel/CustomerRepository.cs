@@ -62,8 +62,24 @@ namespace StoreProjectDB.DataModel
             {
                 CustomerId = order.Customer.Id,
                 StoreId = order.Location.Id,
+                Cost = order.Cost,
+                Date = order.Date
 
             };
+
+            // Add GenOrder to database and save change
+            context.GenOrders.Add(dbGeneralOrder);
+            context.SaveChanges();
+        }
+
+        public int GetAmountOfGenOrders()
+        {
+            //Create context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Count the number of entries in the GenOrder table
+            var orderCount = context.GenOrders.Count();
+
+            return orderCount;
         }
 
 
@@ -90,7 +106,6 @@ namespace StoreProjectDB.DataModel
 
             return appCustomer;
         }
-
 
 
         public Dictionary<string, int> CreateStoreInventory(int storeID)

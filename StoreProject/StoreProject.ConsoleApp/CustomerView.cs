@@ -204,8 +204,13 @@ namespace StoreProject
                         thisOrder.CalculateTotal(products);
 
                         // Place Order at location
+                        // This might need to return a bool to make sure I even send the order to the database
                         currentLocation.OrderPlaced(thisOrder);
 
+                        // Send the order that the user just made to the database.
+                        cusRepo.SendOrderToDB(thisOrder);
+
+                        // Push the Order that was made to 
                         // Stop execution just for a minute(-----------TEMP----------------------)
                         Console.WriteLine("Pause");
                         var read = Console.ReadLine();
