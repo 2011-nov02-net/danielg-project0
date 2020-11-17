@@ -13,7 +13,7 @@ namespace StoreProject.Library
         /// </summary>
         private string _city;
         private Dictionary<string, int> _inventory;
-        private List<IOrder> orders;
+        private List<int> orders;
 
 
         /// <summary>
@@ -23,14 +23,28 @@ namespace StoreProject.Library
         {
             City = city;
             Inventory = inventory;
-            Orders = new List<IOrder>();
+            Orders = new List<int>();
         }
+
 
         public Location(string location, int id)
         {
             CityLocation = location;
             Id = id;
 
+        }
+
+        /// <summary>
+        /// Constructor to create store from db with an inventory.
+        /// </summary>
+        /// <param name="location"></param>
+        /// <param name="id"></param>
+        /// <param name="inventory"></param>
+        public Location(string location, int id, Dictionary<string, int> inventory)
+        {
+            CityLocation = location;
+            Id = id;
+            Inventory = inventory;
         }
 
 
@@ -47,7 +61,7 @@ namespace StoreProject.Library
         /// <summary>
         /// Property to get and set the Orders list
         /// </summary>
-        public List<IOrder> Orders { get => orders; set => orders = value; }
+        public List<int> Orders { get => orders; set => orders = value; }
 
         /// <summary>
         /// Generated property to set the city of a Store
@@ -59,22 +73,39 @@ namespace StoreProject.Library
         public int Id { get; }
 
 
+        /// <summary>
+        /// Check if store has enough inventory to staisfy an order
+        /// </summary>
+        public bool CheckInventory(IOrder order)
+        {
+            foreach (var product in order.CurrentOrder)
+            {
+                var quantityStocked = Inventory[product.Key];
+                if (product.Value > quantityStocked)
+                {
+                    return false;
+                }
+                
+            }
+            return true;
+        }
+
 
         public void OrderPlaced(IOrder order)
         {
+            if (CheckInventory(order))
+            {
 
+            }
         }
 
-        public void createInventory(Dictionary<Product, int> inventory)
-        {
-
-        }
 
         public void PrintOrderHistory()
         {
             foreach (var order in orders)
             {
                 // Add function in order to print its details out.
+
                 
             }
         }
@@ -86,10 +117,5 @@ namespace StoreProject.Library
         }
 
 
-        //I will implement this later but for now it is not as important to getting the functionality done.
-        //public void AddInventory(Product product, int amount)
-        //{
-
-        //}
     }
 }

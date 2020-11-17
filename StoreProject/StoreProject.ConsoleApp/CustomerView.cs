@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using StoreProject.Library;
 using StoreProject.Library.Customer;
+using StoreProject.Library.Order;
 using StoreProjectDB.DataModel;
 
 namespace StoreProject
@@ -16,6 +18,11 @@ namespace StoreProject
         // Set the count of customers field to 0 so I can use logic to see
         //      if it has been set or not
         private CustomerClass currentCustomer;
+
+        /// <summary>
+        /// Creating field that I will assign as the current location when a user picks one
+        /// </summary>
+        private Location currentLocation;
 
         /// <summary>
         /// Creating the field that I will assign the Customer Repository
@@ -164,11 +171,9 @@ namespace StoreProject
                         storeID = int.Parse(location);
 
                         var inventory = cusRepo.CreateStoreInventory(storeID);
-                        // To Do ---------------------------------------------------------------------------------------------------------
-                        // Create console location.
-
+                        currentLocation = cusRepo.CreateStoreWithInventory(storeID);
                         // Ask customer how many items they want of each item in stock
-                        foreach (var item in inventory)
+                        foreach (var item in currentLocation.Inventory)
                         {
                             while (true)
                             {
@@ -176,17 +181,24 @@ namespace StoreProject
                                 var desired = Console.ReadLine();
                                 int tryToParse;
                                 var desiredInt = int.TryParse(desired, out tryToParse);
-                                var worked = currentCustomer.addToCart(item.Key, tryToParse);
+                                var worked = currentCustomer.AddToCart(item.Key, tryToParse);
                                 if (worked == true)
                                 {
                                     break;
                                 }
                             }
-
-                            // Shopping cart is built as far as I can tell. Now make the console location
-                            //   with its inventory, iterate through to see if the amounts work, and place the order if yes.
-
                         }
+
+                        IOrder thisOrder = new Order(currentLocation, currentCustomer);
+
+                        // Make sure the location inventory gets updated locally, then take the store
+                        //      And pass it to customer Repos so i can update the inventory for that store
+                        // Call orderplaces on the store, and I should be able to get back customer, invnetory, cost, time
+                        //    Send all that to the db and it will create a new orderid for me, theoretically
+
+
+
+
                     }
                     // Customer chooses to view their order history
                     if (custChoice == "v")

@@ -8,7 +8,7 @@ namespace StoreProject
     public interface IOrder
     {
 
-        public string Location { get; set; }
+        public Location Location { get; set; }
         public CustomerClass Customer { get; set; }
         public IDictionary<string, int> CurrentOrder { get; set; }
 

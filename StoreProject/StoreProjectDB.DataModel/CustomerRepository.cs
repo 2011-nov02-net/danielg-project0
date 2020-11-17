@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using StoreProject.Library.Customer;
 using System.Linq;
+using StoreProject.Library;
 
 namespace StoreProjectDB.DataModel
 {
@@ -88,13 +89,8 @@ namespace StoreProjectDB.DataModel
             // Get agg inventory items from the database- this is a stores inventory
             var itemsInInventory = context.AggInventories.Where(i => i.StoreId == storeID).ToList();
             // create console inventory with db inventory pieces
-            //var inven = itemsInInventory.Select(i => inventory.Add((string)i.Product, (int)i.InStock)).ToDictionary();
-            //var invent = itemsInInventory.Select(i => new Dictionary<string, int>() { i.Product, i.InStock });
-
 
             Dictionary<string, int> inv = itemsInInventory.ToDictionary(i => i.Product, i => i.InStock);
-
-
 
             return inv;
         }
@@ -125,12 +121,36 @@ namespace StoreProjectDB.DataModel
         }
 
 
+        public List<Location> GetStores()
+        {
+            // Create Context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Create DB object list of stores
+            var dbStores = context.Stores.ToList();
+            // Make DB list into Console Stores List
+            var appStores = dbStores.Select(s => new Location(s.Location, s.Id)).ToList();
+
+            return appStores;
+        }
+
+        public Location CreateStoreWithInventory(int storeID)
+        {
+            // Create empty dictionary to fill in inventory
+            Dictionary<string, int> inventory = new Dictionary<string, int>();
+            //SortedList<>
+            // Create Context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Get agg inventory items from the database- this is a stores inventory
+            var itemsInInventory = context.AggInventories.Where(i => i.StoreId == storeID).ToList();
+            // create console inventory with db inventory pieces
+            Dictionary<string, int> inv = itemsInInventory.ToDictionary(i => i.Product, i => i.InStock);
+            // Create store From Store DBtable
+            var dbStore = context.Stores.Where(s => s.Id == storeID);
+            // Create the store in the console. Complete with an inventory
+            var appStore = dbStore.Select(s => new Location(s.Location, s.Id, inv)).ToList();
 
 
-
-
-
-
-
+            return appStore.First();
+        }
     }
 }

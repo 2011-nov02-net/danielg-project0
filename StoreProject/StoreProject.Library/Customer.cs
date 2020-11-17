@@ -58,7 +58,11 @@ namespace StoreProject.Library.Customer
         }
 
 
-        public bool addToCart(string productName, int amountDesired)
+
+        /// <summary>
+        /// I might want to put this logic in order eventually
+        /// </summary>
+        public bool AddToCart(string productName, int amountDesired)
         {
             if (amountDesired > 10)
             {
