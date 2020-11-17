@@ -196,8 +196,25 @@ namespace StoreProject
                         // Call orderplaces on the store, and I should be able to get back customer, invnetory, cost, time
                         //    Send all that to the db and it will create a new orderid for me, theoretically
 
+                        // Print store inventory before placing order(TEMPPPPPPP)
+                        foreach (var item in currentLocation.Inventory)
+                        {
+                            Console.WriteLine($"ITEM: ({item.Key})---- IN STOCK: ({item.Value})");
+                        }
+
+                        // Place Order
+                        currentLocation.OrderPlaced(thisOrder);
 
 
+                        //Print store inventory after placing order(TEMPPPPPPP)
+                        foreach (var item in currentLocation.Inventory)
+                        {
+                            Console.WriteLine($"ITEM: ({item.Key})---- IN STOCK: ({item.Value})");
+                        }
+
+
+                        Console.WriteLine("Pause");
+                        var read = Console.ReadLine();
 
                     }
                     // Customer chooses to view their order history

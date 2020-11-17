@@ -78,24 +78,36 @@ namespace StoreProject.Library
         /// </summary>
         public bool CheckInventory(IOrder order)
         {
-            foreach (var product in order.CurrentOrder)
+            foreach (var product in order.Customer.ShoppingCart)
             {
+                // set quantity stocked to the value stored in inventory at product.key
                 var quantityStocked = Inventory[product.Key];
+                // If there are more in the order than there are in stock
                 if (product.Value > quantityStocked)
                 {
                     return false;
                 }
                 
             }
+            // If there is enough in stock for all of the 
             return true;
         }
 
-
+        /// <summary>
+        /// Location calls this method to update 
+        /// </summary>
+        /// <param name="order"></param>
         public void OrderPlaced(IOrder order)
         {
+            // Run this method to check if there is enough in stock
             if (CheckInventory(order))
             {
-
+                // For each item in the order
+                foreach (var product in order.Customer.ShoppingCart)
+                {
+                    // Subtract from inventory the amount of product that was ordered
+                    Inventory[product.Key] -= product.Value;
+                }
             }
         }
 
