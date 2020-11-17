@@ -53,7 +53,7 @@ namespace StoreProjectDB.DataModel
             context.SaveChanges();
         }
 
-        public void SendOrderToDB(IOrder order)
+        public void SendGenOrderToDB(IOrder order)
         {
             // Create context
             using var context = new danielGProj0DBContext(_contextOptions);
@@ -70,11 +70,43 @@ namespace StoreProjectDB.DataModel
             // Add GenOrder to database and save change
             context.GenOrders.Add(dbGeneralOrder);
             context.SaveChanges();
+
+
+            // From here, see the last order to get the id and update the other tables
+            int lastOrder = GetAmountOfGenOrders();
+
+            SendAggOrder(order, lastOrder);
+        }
+
+        public void UpdateInventory()
+        {
+
+        }
+
+        public void SendAggOrder(IOrder order, int orderID)
+        {
+            // Create Context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Create the aggOrders list that need to get sent
+            List<AggOrder> aggOrders = new List<AggOrder>();
+            // For each value in order.customer.shoppingCart, create a single aggOrder
+            //   then add that aggOrder to the database
+            foreach (var product in order.Customer.ShoppingCart)
+            {
+                AggOrder orderDetails = new AggOrder
+                {
+                    OrderId = orderID,
+                    Product = product.Key,
+                    Amount = product.Value
+                };
+                context.AggOrders.Add(orderDetails);
+            }
+            context.SaveChanges();
         }
 
         public int GetAmountOfGenOrders()
         {
-            //Create context
+            // Create context
             using var context = new danielGProj0DBContext(_contextOptions);
             // Count the number of entries in the GenOrder table
             var orderCount = context.GenOrders.Count();

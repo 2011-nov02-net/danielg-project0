@@ -208,7 +208,7 @@ namespace StoreProject
                         currentLocation.OrderPlaced(thisOrder);
 
                         // Send the order that the user just made to the database.
-                        cusRepo.SendOrderToDB(thisOrder);
+                        cusRepo.SendGenOrderToDB(thisOrder);
 
                         // Push the Order that was made to 
                         // Stop execution just for a minute(-----------TEMP----------------------)
