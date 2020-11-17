@@ -14,7 +14,6 @@ namespace StoreProject.Library.Order
         private DateTime date;
         private decimal cost;
 
-        private IDictionary<string, int> _currentOrder;
 
         /// <summary>
         /// Constructor used to create an order
@@ -26,6 +25,7 @@ namespace StoreProject.Library.Order
             Date = DateTime.Now;
             
         }
+
 
         /// <summary>
         /// roperty to get or set the location of an order

@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using StoreProject.Library.Customer;
 using System.Linq;
 using StoreProject.Library;
+using StoreProject;
+using StoreProject.Library.Order;
 
 namespace StoreProjectDB.DataModel
 {
@@ -22,6 +24,51 @@ namespace StoreProjectDB.DataModel
         public ManagerRepository(DbContextOptions<danielGProj0DBContext> contextOptions)
         {
             _contextOptions = contextOptions;
+        }
+
+        public List<IOrder> GetStoreOrders(int storeID)
+        {
+            // Create Context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Get all of the GenOrders from the Database, based on the storeID
+            var generalOrders = context.GenOrders.Where(o => o.StoreId == storeID);
+            // Get all of the AggOrders from the Database, based on storeID
+            var aggOrders = new List<AggOrder>();
+
+            // Create a list of orders to add to based on the orders to a store
+            var aggregatedOrders = new List<IOrder>();
+            // for each order to a store, get the details of it.
+            foreach (var order in generalOrders)
+            {
+                // Get the Console Customer from the DB
+                var tempCust = GetCustomerFromID(order.CustomerId);
+                // Get the Console Location from the DB
+                var tempLocation = GetStoreFromID(order.StoreId);
+                // Add Location and Customer to the order
+                Order tempOrder = new Order(tempLocation, tempCust);
+                // Create list of all the aggregateOrders from a store Location 
+                var listAggOrders = context.AggOrders.Where(o => o.OrderId == order.Id);
+                foreach (var agOrder in listAggOrders)
+                {
+                    // Add the aggregateOrders essentially as orders being placed so I can
+                    //   Just keep them in memory and move them
+                    tempOrder.Customer.ShoppingCart.Add(agOrder.Product, agOrder.Amount);
+                }
+                aggregatedOrders.Add(tempOrder);
+            }
+            return aggregatedOrders;
+        }
+
+        public Location GetStoreFromID(int storeID)
+        {
+            // Create Context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Get "Stores" based on ID
+            var dbStore = context.Stores.Where(s => s.Id == storeID).First();
+            // Convert DBStore into Console Store
+            Location appLocation = new Location(dbStore.Location, dbStore.Id);
+
+            return appLocation;
         }
 
 
@@ -45,6 +92,18 @@ namespace StoreProjectDB.DataModel
             var storeCount = context.Stores.Count();
 
             return storeCount;
+        }
+
+        public CustomerClass GetCustomerFromID(int id)
+        {
+            // Create Context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Find the database entry for the specific Customer
+            var customer = context.Customers.Find(id);
+            // Create the Console Customer from the database customer
+            CustomerClass appCustomer = new CustomerClass(customer.Name, customer.Id);
+
+            return appCustomer;
         }
 
     }
