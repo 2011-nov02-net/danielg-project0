@@ -51,6 +51,14 @@ namespace StoreProject.Library
             Inventory = inventory;
         }
 
+        /// <summary>
+        /// Empty constructor to help with testing methods
+        /// </summary>
+        public Location()
+        {
+
+        }
+
 
         /// <summary>
         /// Property to get and set the City.
@@ -113,6 +121,21 @@ namespace StoreProject.Library
                     Inventory[product.Key] -= product.Value;
                 }
             }
+        }
+
+        /// <summary>
+        /// Method that can be run to check if the store location will be under 0.
+        ///     this is not allowed so returning false cancels tranaction
+        /// </summary>
+        /// <param name="inventory"></param>
+        /// <returns></returns>
+        public bool CheckInventoryValid(int inventory)
+        {
+            if (inventory < 0)
+            {
+                return false;
+            }
+            return true;
         }
 
         /// <summary>
