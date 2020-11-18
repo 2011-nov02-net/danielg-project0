@@ -125,7 +125,7 @@ namespace StoreProject
                     storeProducts = manRepo.GetProducts();
                     Console.WriteLine("------------------------------------------");
                     Console.WriteLine("------------------------------------------");
-                    Console.WriteLine($"Viewing Location: {currentLocation.CityLocation}");
+                    Console.WriteLine($"Viewing Orders at Location: {currentLocation.CityLocation} Branch");
                     Console.WriteLine("------------------------------------------");
                     foreach (var order in currentLocation.Orders)
                     {
@@ -134,7 +134,6 @@ namespace StoreProject
                     }
 
                     // Allow the manager to look at specific products ordered
-                    Console.WriteLine("------------------------------");
                     Console.WriteLine("------------------------------");
                     Console.WriteLine("Pick an order to view, or exit");
                     Console.WriteLine("------------------------------");
