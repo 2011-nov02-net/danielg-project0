@@ -33,6 +33,7 @@ namespace StoreProject
             while (true)
             {
                 Console.WriteLine("--------------------------");
+                Console.WriteLine("--------------------------");
                 Console.WriteLine("Welcome to Dumb McDonald's");
                 Console.WriteLine("--------------------------");
                 Console.WriteLine("Are You: ");

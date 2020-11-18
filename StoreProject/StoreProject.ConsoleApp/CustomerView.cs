@@ -15,8 +15,9 @@ namespace StoreProject
         /// </summary>
         List<CustomerClass> customers = new List<CustomerClass>();
 
-        // Set the count of customers field to 0 so I can use logic to see
-        //      if it has been set or not
+        /// <summary>
+        /// Field to keep track of the logged in customer
+        /// </summary>
         private CustomerClass currentCustomer;
 
         /// <summary>
@@ -47,9 +48,11 @@ namespace StoreProject
         /// </summary>
         public void BeACustomer()
         {
-            Console.WriteLine("-------------");
+            Console.WriteLine("------------------------");
+            Console.WriteLine("------------------------");
             Console.WriteLine("New Customer? (n)");
             Console.WriteLine("Returning Customer? (r)");
+            Console.WriteLine("------------------------");
 
             while (true)
             {
@@ -60,7 +63,9 @@ namespace StoreProject
                 {
                     //Create new Customer
                     Console.WriteLine("----------------------------");
+                    Console.WriteLine("----------------------------");
                     Console.WriteLine("Please Type in Your Full Name: ");
+                    Console.WriteLine("----------------------------");
                     var fullName = Console.ReadLine();
 
                     //Check name string to make sure it somewhat resembles a name
@@ -82,7 +87,9 @@ namespace StoreProject
                 if (input == "r")
                 {
                     Console.WriteLine("--------------");
+                    Console.WriteLine("--------------");
                     Console.WriteLine("Find Your ID: ");
+                    Console.WriteLine("--------------");
                     //make customers array
                     var customers = cusRepo.GetAllCustomers();
 
@@ -92,7 +99,7 @@ namespace StoreProject
                         cust.printDetails();
                     }
 
-                    Console.WriteLine("-----------------------------");
+                    Console.WriteLine("----------------------");
                     Console.WriteLine("Please Enter Your ID: ");
                     Console.WriteLine("Or Exit: (x)");
 
@@ -141,7 +148,9 @@ namespace StoreProject
                 {
                     // Customer "Signed in" Welcome Screen
                     Console.WriteLine("-------------------------------");
-                    Console.WriteLine($"Welcome {currentCustomer.Name}!!");
+                    Console.WriteLine("-------------------------------");
+                    Console.WriteLine($"Welcome {currentCustomer.Name}!");
+                    Console.WriteLine("-------------------------------");
                     Console.WriteLine("Would You Like To: ");
                     Console.WriteLine("Place an Order: (p)");
                     Console.WriteLine("View Your Order History: (v)");
@@ -150,8 +159,19 @@ namespace StoreProject
                     // Customer chooses to place an order
                     if (custChoice == "p")
                     {
-                        Console.WriteLine("-------------------");
-                        Console.WriteLine("Choose A Location: ");
+                        Console.WriteLine("----------------------------------------------");
+                        Console.WriteLine("----------------------------------------------");
+                        Console.WriteLine("Enter a StoreID you would like to order from: ");
+                        Console.WriteLine("----------------------------------------------");
+                        // Print out store details for the customer to choose a location to order from
+                        // Get list of stores from database
+                        var storesToPickFrom = cusRepo.GetStores();
+                        // Iterate through store list and print out stores
+                        foreach (var store in storesToPickFrom)
+                        {
+                            store.PrintDetails();
+                        }
+
                         // Ask Customer which store they want to place the order at(still need to print the list of stores)-------------
                         var location = Console.ReadLine();
                         int storeID = 0;
@@ -179,6 +199,10 @@ namespace StoreProject
                         var inventory = cusRepo.CreateStoreInventory(storeID);
                         currentLocation = cusRepo.CreateStoreWithInventory(storeID);
                         // Ask customer how many items they want of each item in stock
+                        Console.WriteLine("----------------------------------------------------");
+                        Console.WriteLine("----------------------------------------------------");
+                        Console.WriteLine($"Welcome to Dumb Mcdonalds, {currentLocation.CityLocation} branch");
+                        Console.WriteLine("----------------------------------------------------");
                         foreach (var item in currentLocation.Inventory)
                         {
                             while (true)
@@ -210,15 +234,20 @@ namespace StoreProject
                         // Send the order that the user just made to the database.
                         cusRepo.SendGenOrderToDB(thisOrder);
 
-
+                        Console.WriteLine("----------------------------------------------");
                         Console.WriteLine("----------------------------------------------");
                         Console.WriteLine("Would you like to view your order history: (v)");
+                        Console.WriteLine("----------------------------------------------");
                         Console.WriteLine("Or exit: (x)");
                         var read = Console.ReadLine();
                         // If customer wants to back out to main menu
                         if (read == "x")
                         {
                             break;
+                        }
+                        if (read == "v")
+                        {
+                            custChoice = "v";
                         }
 
                     }
@@ -228,9 +257,10 @@ namespace StoreProject
                         var storeProducts = cusRepo.GetProducts();
                         // Set the current 
                         currentCustomer = cusRepo.GetCustomerWithOrders(currentCustomer.Id);
-
+                        Console.WriteLine("------------------------------------------");
                         Console.WriteLine("------------------------------------------");
                         Console.WriteLine($"Viewing Customer: {currentCustomer.Name}");
+                        Console.WriteLine("------------------------------------------");
                         foreach (var order in currentCustomer.CustomersOrders)
                         {
                             decimal orderTotal = order.CalculateTotal(storeProducts);
@@ -240,6 +270,7 @@ namespace StoreProject
                         // Allow the customer to look at specific products ordered
                         Console.WriteLine("------------------------------");
                         Console.WriteLine("Pick an order to view, or exit");
+                        Console.WriteLine("------------------------------");
                         var orderToView = Console.ReadLine();
 
                         if (orderToView == "x")
@@ -259,6 +290,7 @@ namespace StoreProject
                             // print out the product and amount purchased in that specific order
                             Console.WriteLine($"Product: {product.Key}, Amount: ({product.Value}) ");
                         }
+                        Console.WriteLine("--------------------------------------");
                         Console.WriteLine("Enter any key to return to main menu: ");
                         Console.ReadLine();
 

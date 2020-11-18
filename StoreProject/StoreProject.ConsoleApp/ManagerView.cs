@@ -19,7 +19,7 @@ namespace StoreProject
 
         /// <summary>
         /// When the manager picka a location, this field will get filled with orders and
-        /// an inventory that the manager can look at
+        ///     an inventory that the manager can look at
         /// </summary>
         Location currentLocation;
 
@@ -41,8 +41,10 @@ namespace StoreProject
         }
 
 
-
-
+        /// <summary>
+        /// Method that runs when user picks to be a manager. Has functions such as view locations,
+        ///     view orders....
+        /// </summary>
         public void BeAManager()
         {
             Console.WriteLine("-------------");
@@ -52,7 +54,9 @@ namespace StoreProject
             {
                 //list out all of the locations
                 Console.WriteLine("-------------------");
+                Console.WriteLine("-------------------");
                 Console.WriteLine("Would you like to: ");
+                Console.WriteLine("-------------------");
                 Console.WriteLine("View all Store Locations: (v)");
                 Console.WriteLine("Exit to Main Screen: (x)");
 
@@ -66,8 +70,10 @@ namespace StoreProject
                 if (input == "v")
                 {
                     // Print all locations
-                    Console.WriteLine("-------------");
+                    Console.WriteLine("----------------");
+                    Console.WriteLine("----------------");
                     Console.WriteLine("Choose a Store: ");
+                    Console.WriteLine("----------------");
 
                     // Get list of stores from database
                     var stores = manRepo.GetStores();
@@ -76,11 +82,11 @@ namespace StoreProject
                     {
                         store.PrintDetails();
                     }
-
-                    Console.WriteLine("------------------------------------------------");
+                    Console.WriteLine("----------------------------------------");
+                    Console.WriteLine("----------------------------------------");
                     // Let user view location orders or exit to all locations
                     Console.WriteLine("Type in a StoreID to view, or exit(x): ");
-
+                    Console.WriteLine("----------------------------------------");
                     // Get manager choice of store to view.
                     var city = Console.ReadLine();
 
@@ -118,7 +124,9 @@ namespace StoreProject
                     // Set the list of all of the products a store sells
                     storeProducts = manRepo.GetProducts();
                     Console.WriteLine("------------------------------------------");
+                    Console.WriteLine("------------------------------------------");
                     Console.WriteLine($"Viewing Location: {currentLocation.CityLocation}");
+                    Console.WriteLine("------------------------------------------");
                     foreach (var order in currentLocation.Orders)
                     {
                         decimal orderTotal = order.CalculateTotal(storeProducts);
@@ -127,7 +135,9 @@ namespace StoreProject
 
                     // Allow the manager to look at specific products ordered
                     Console.WriteLine("------------------------------");
+                    Console.WriteLine("------------------------------");
                     Console.WriteLine("Pick an order to view, or exit");
+                    Console.WriteLine("------------------------------");
                     var orderToView = Console.ReadLine();
 
                     if (orderToView == "x")

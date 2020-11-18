@@ -25,9 +25,10 @@ namespace StoreProjectDB.DataModel
             _contextOptions = contextOptions;
         }
 
-        
-
-
+        /// <summary>
+        /// Method returns list of console customers from the database model
+        /// </summary>
+        /// <returns></returns>
         public List<CustomerClass> GetAllCustomers()
         {
             // Create Context
@@ -40,7 +41,10 @@ namespace StoreProjectDB.DataModel
             return appCustomers;
         }
 
-
+        /// <summary>
+        /// Method runs when creating a new 
+        /// </summary>
+        /// <param name="customer"></param>
         public void CreateCustomerInDb(CustomerClass customer)
         {
             // Create Context
