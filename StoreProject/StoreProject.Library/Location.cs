@@ -109,7 +109,8 @@ namespace StoreProject.Library
         /// Location calls this method to update 
         /// </summary>
         /// <param name="order"></param>
-        public void OrderPlaced(IOrder order)
+        /// 
+        public bool OrderPlaced(IOrder order)
         {
             // Run this method to check if there is enough in stock
             if (CheckInventory(order))
@@ -120,7 +121,9 @@ namespace StoreProject.Library
                     // Subtract from inventory the amount of product that was ordered
                     Inventory[product.Key] -= product.Value;
                 }
+                return true;
             }
+            return false;
         }
 
         /// <summary>

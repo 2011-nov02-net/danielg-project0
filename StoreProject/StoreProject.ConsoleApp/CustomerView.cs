@@ -182,12 +182,12 @@ namespace StoreProject
                         {
                             storeID = int.Parse(location);
                         }
-                        catch (InvalidCastException)
+                        catch (Exception)
                         {
-                            Console.WriteLine("Please Enter a Valid ID");
+                            Console.WriteLine("Please Enter a Valid Store ID: ");
                             location = Console.ReadLine();
                         }
-
+                        storeID = int.Parse(location);
                         // If storeID that customer provides is not valid, make them re-enter it.
                         if ((storeID < 1) || (storeID > storeCount))
                         {
@@ -229,11 +229,14 @@ namespace StoreProject
 
                         // Place Order at location
                         // This might need to return a bool to make sure I even send the order to the database
-                        currentLocation.OrderPlaced(thisOrder);
+                        bool inventorySufficient = currentLocation.OrderPlaced(thisOrder);
 
-                        // Send the order that the user just made to the database.
-                        cusRepo.SendGenOrderToDB(thisOrder);
-
+                        if (inventorySufficient)
+                        {
+                            // Send the order that the user just made to the database.
+                            cusRepo.SendGenOrderToDB(thisOrder);
+                        }
+                        
                         Console.WriteLine("----------------------------------------------");
                         Console.WriteLine("----------------------------------------------");
                         Console.WriteLine("Would you like to view your order history: (v)");
@@ -265,7 +268,7 @@ namespace StoreProject
                         {
                             decimal orderTotal = order.CalculateTotal(storeProducts);
 
-                            Console.WriteLine($"Order Number {order.OrderID} in {order.Location.CityLocation}, with total cost: ${orderTotal}. Date: {order.Date}");
+                            Console.WriteLine($"Order Number ({order.OrderID}) in {order.Location.CityLocation}, with total cost: ${orderTotal}. Date: {order.Date}");
                         }
                         // Allow the customer to look at specific products ordered
                         Console.WriteLine("------------------------------");

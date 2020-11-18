@@ -113,6 +113,11 @@ namespace StoreProject.Library.Order
             return (int)(prod.Price *= amt);
         }
 
+        /// <summary>
+        /// Method to add products to a customers cart
+        /// </summary>
+        /// <param name="product"></param>
+        /// <param name="amountOrderd"></param>
         public void AddToCustomerCart(Product product, int amountOrderd)
         {
             Customer.ShoppingCart.Add(product.ProductName, amountOrderd);

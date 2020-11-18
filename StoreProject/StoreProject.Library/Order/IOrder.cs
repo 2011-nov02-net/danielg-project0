@@ -39,5 +39,19 @@ namespace StoreProject
         /// Print the details of an order
         /// </summary>
         public void printDetails();
+
+        /// <summary>
+        /// Method to add products to a customers cart
+        /// </summary>
+        /// <param name="product"></param>
+        /// <param name="amountOrderd"></param>
+        public void AddToCustomerCart(Product product, int amountOrderd);
+
+        /// <summary>
+        /// Using method logic to test out methods on class
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public int CalaculateTotalOfOneProduct(Product prod);
     }
 }
