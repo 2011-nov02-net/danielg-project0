@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using StoreProject.Library;
-using StoreProject.Library.Order;
 using StoreProjectDB.DataModel;
 
 namespace StoreProject

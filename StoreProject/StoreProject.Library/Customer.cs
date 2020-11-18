@@ -6,7 +6,6 @@ namespace StoreProject.Library.Customer
     public class CustomerClass 
     {
         // Private fields to store data specific to the customer.
-        private string fullName;
         private Dictionary<string, int> shoppingCart;
         private List<IOrder> customersOrders;
 
