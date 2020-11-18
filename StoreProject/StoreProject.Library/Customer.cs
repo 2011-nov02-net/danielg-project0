@@ -60,7 +60,7 @@ namespace StoreProject.Library.Customer
         }
 
         /// <summary>
-        /// I might want to put this logic in order eventually
+        /// Check whether a customer is trying to order too many of an item
         /// </summary>
         public bool AddToCart(string productName, int amountDesired)
         {

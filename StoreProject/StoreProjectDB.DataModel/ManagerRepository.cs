@@ -112,7 +112,10 @@ namespace StoreProjectDB.DataModel
             return appLocation;
         }
 
-
+        /// <summary>
+        /// Get a list of console app stores from the database
+        /// </summary>
+        /// <returns></returns>
         public List<Location> GetStores()
         {
             // Create Context
@@ -125,6 +128,10 @@ namespace StoreProjectDB.DataModel
             return appStores;
         }
 
+        /// <summary>
+        /// Get the number of stores with different location
+        /// </summary>
+        /// <returns></returns>
         public int GetNumberOfStores()
         {
             //Create Context
@@ -135,6 +142,11 @@ namespace StoreProjectDB.DataModel
             return storeCount;
         }
 
+        /// <summary>
+        /// Return a console app customer based on a given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public CustomerClass GetCustomerFromID(int id)
         {
             // Create Context
@@ -147,6 +159,11 @@ namespace StoreProjectDB.DataModel
             return appCustomer;
         }
 
+        /// <summary>
+        /// Get a list of all of the products in the database
+        ///     in order to return a list of console app products
+        /// </summary>
+        /// <returns></returns>
         public List<StoreProject.Library.Product> GetProducts()
         {
             // Create context

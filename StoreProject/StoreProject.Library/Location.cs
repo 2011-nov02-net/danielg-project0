@@ -26,7 +26,11 @@ namespace StoreProject.Library
             Orders = new List<IOrder>();
         }
 
-
+        /// <summary>
+        /// Constructo used to create a Location with a set location and id
+        /// </summary>
+        /// <param name="location"></param>
+        /// <param name="id"></param>
         public Location(string location, int id)
         {
             CityLocation = location;

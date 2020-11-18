@@ -28,7 +28,16 @@ namespace StoreProject
         /// </summary>
         public int OrderID { get; set; }
 
+        /// <summary>
+        /// calculate the total cost of an order
+        /// </summary>
+        /// <param name="products"></param>
+        /// <returns></returns>
         public decimal CalculateTotal(List<Product> products);
 
+        /// <summary>
+        /// Print the details of an order
+        /// </summary>
+        public void printDetails();
     }
 }

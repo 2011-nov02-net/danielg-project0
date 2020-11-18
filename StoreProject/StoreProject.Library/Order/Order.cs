@@ -89,7 +89,9 @@ namespace StoreProject.Library.Order
             return orderTotal;
         }
 
-
+        /// <summary>
+        /// Print details of an order
+        /// </summary>
         public void printDetails()
         {
             Console.WriteLine("---------------");

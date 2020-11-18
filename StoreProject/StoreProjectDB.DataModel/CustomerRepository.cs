@@ -60,6 +60,10 @@ namespace StoreProjectDB.DataModel
             context.SaveChanges();
         }
 
+        /// <summary>
+        /// Send a console app to the database
+        /// </summary>
+        /// <param name="order"></param>
         public void SendGenOrderToDB(IOrder order)
         {
             // Create context
@@ -90,6 +94,10 @@ namespace StoreProjectDB.DataModel
 
         }
 
+        /// <summary>
+        /// Update the inventory in the database after an order is placed
+        /// </summary>
+        /// <param name="order"></param>
         public void UpdateInventory(IOrder order)
         {
             // Create Context
@@ -109,6 +117,11 @@ namespace StoreProjectDB.DataModel
             context.SaveChanges();
         }
 
+        /// <summary>
+        /// Send aggregate Order to database when an order is placed
+        /// </summary>
+        /// <param name="order"></param>
+        /// <param name="orderID"></param>
         public void SendAggOrder(IOrder order, int orderID)
         {
             // Create Context
@@ -130,6 +143,11 @@ namespace StoreProjectDB.DataModel
             context.SaveChanges();
         }
 
+
+        /// <summary>
+        /// Get amount of GenOrders(Number of orders placed Company wide)
+        /// </summary>
+        /// <returns></returns>
         public int GetAmountOfGenOrders()
         {
             // Create context
@@ -140,7 +158,10 @@ namespace StoreProjectDB.DataModel
             return orderCount;
         }
 
-
+        /// <summary>
+        /// Get amount of customers that have an account
+        /// </summary>
+        /// <returns></returns>
         public int GetAmountOfCustomers()
         {
             // Create Context
@@ -169,6 +190,11 @@ namespace StoreProjectDB.DataModel
             return appCustomer;
         }
 
+        /// <summary>
+        /// Create a console customer complete with their order history
+        /// </summary>
+        /// <param name="custID"></param>
+        /// <returns></returns>
         public CustomerClass GetCustomerWithOrders(int custID)
         {
             // Create Context
@@ -240,7 +266,10 @@ namespace StoreProjectDB.DataModel
             return inv;
         }
 
-
+        /// <summary>
+        /// Get all of the products from the database and create the console app products
+        /// </summary>
+        /// <returns></returns>
         public List<StoreProject.Library.Product> GetProducts()
         {
             // Create context
@@ -254,7 +283,10 @@ namespace StoreProjectDB.DataModel
             return appProducts;
         }
 
-
+        /// <summary>
+        /// Get the number of locations in database
+        /// </summary>
+        /// <returns></returns>
         public int GetNumberOfStores()
         {
             //Create Context
@@ -265,7 +297,10 @@ namespace StoreProjectDB.DataModel
             return storeCount;
         }
 
-
+        /// <summary>
+        /// Get a list of all of the stores in the database
+        /// </summary>
+        /// <returns></returns>
         public List<Location> GetStores()
         {
             // Create Context

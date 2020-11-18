@@ -14,8 +14,14 @@ namespace StoreProject.Library
             Price = (decimal)price;
         }
 
-        // Public properties to get or set the value of the products
+        /// <summary>
+        /// Public property to get or set the name of a product
+        /// </summary>
         public string ProductName { get => _productName; set => _productName = value; }
+
+        /// <summary>
+        /// Public property to get or set the price of a product
+        /// </summary>
         public decimal Price { get => _price; set => _price = value; }
     }
 }
