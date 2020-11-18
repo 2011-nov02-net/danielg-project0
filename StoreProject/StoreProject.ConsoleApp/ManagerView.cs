@@ -122,10 +122,11 @@ namespace StoreProject
                     foreach (var order in currentLocation.Orders)
                     {
                         decimal orderTotal = order.CalculateTotal(storeProducts);
-                        Console.WriteLine($"Order Number {order.OrderID} by {order.Customer.Name}, with total cost: {orderTotal}");
+                        Console.WriteLine($"Order Number {order.OrderID} by {order.Customer.Name}, with total cost: {orderTotal}. Date: ({order.Date})");
                     }
+
                     // Allow the manager to look at specific products ordered
-                    Console.WriteLine("----------------------");
+                    Console.WriteLine("------------------------------");
                     Console.WriteLine("Pick an order to view, or exit");
                     var orderToView = Console.ReadLine();
 
@@ -139,9 +140,10 @@ namespace StoreProject
                     orderIDHere = int.Parse(orderToView);
                     // Find the order that the manager chose to view the details of
                     var orderChosen = currentLocation.Orders.Find(o => o.OrderID == orderIDHere);
+
                     foreach (var product in orderChosen.Customer.ShoppingCart)
                     {
-                        //
+                        // print out the product and amount purchased in that specific order
                         Console.WriteLine($"Product: {product.Key}, Amount: ({product.Value}) ");
                     }
                     Console.WriteLine("Enter any key to return to main menu: ");

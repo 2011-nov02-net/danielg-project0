@@ -210,17 +210,58 @@ namespace StoreProject
                         // Send the order that the user just made to the database.
                         cusRepo.SendGenOrderToDB(thisOrder);
 
-                 
-                        // Stop execution just for a minute(-----------TEMP----------------------)
-                        Console.WriteLine("Pause");
+
+                        Console.WriteLine("----------------------------------------------");
+                        Console.WriteLine("Would you like to view your order history: (v)");
+                        Console.WriteLine("Or exit: (x)");
                         var read = Console.ReadLine();
+                        // If customer wants to back out to main menu
+                        if (read == "x")
+                        {
+                            break;
+                        }
 
                     }
                     // Customer chooses to view their order history
                     if (custChoice == "v")
                     {
+                        var storeProducts = cusRepo.GetProducts();
                         // Set the current 
                         currentCustomer = cusRepo.GetCustomerWithOrders(currentCustomer.Id);
+
+                        Console.WriteLine("------------------------------------------");
+                        Console.WriteLine($"Viewing Customer: {currentCustomer.Name}");
+                        foreach (var order in currentCustomer.CustomersOrders)
+                        {
+                            decimal orderTotal = order.CalculateTotal(storeProducts);
+
+                            Console.WriteLine($"Order Number {order.OrderID} in {order.Location.CityLocation}, with total cost: {orderTotal}. Date: {order.Date}");
+                        }
+                        // Allow the customer to look at specific products ordered
+                        Console.WriteLine("------------------------------");
+                        Console.WriteLine("Pick an order to view, or exit");
+                        var orderToView = Console.ReadLine();
+
+                        if (orderToView == "x")
+                        {
+                            break;
+                        }
+
+                        // Make the int that I will set the order chosen to view
+                        int orderIDHere = 0;
+                        // Parse that int
+                        orderIDHere = int.Parse(orderToView);
+                        // Find the order that the customer chose to view the details of
+                        var orderChosen = currentCustomer.CustomersOrders.Find(o => o.OrderID == orderIDHere);
+
+                        foreach (var product in orderChosen.Customer.ShoppingCart)
+                        {
+                            // print out the product and amount purchased in that specific order
+                            Console.WriteLine($"Product: {product.Key}, Amount: ({product.Value}) ");
+                        }
+                        Console.WriteLine("Enter any key to return to main menu: ");
+                        Console.ReadLine();
+
 
                     }
                     // Customer choooses to exit

@@ -16,7 +16,7 @@ namespace StoreProject.Library.Order
         private int _orderID;
 
         /// <summary>
-        /// Constructor used to create an order
+        /// Constructor used to create an order. This is the one from the cosole app.
         /// </summary>
         public Order(Location location, CustomerClass customer)
         {
@@ -28,13 +28,13 @@ namespace StoreProject.Library.Order
 
 
         /// <summary>
-        /// Constructor used to create an order
+        /// Constructor used to create an order. This is the one from the database 
         /// </summary>
-        public Order(Location location, CustomerClass customer, int orderID)
+        public Order(Location location, CustomerClass customer, int orderID, DateTime dateOfOrder)
         {
             Location = location;
             Customer = customer;
-            Date = DateTime.Now;
+            Date = dateOfOrder;
             OrderID = orderID;
 
         }

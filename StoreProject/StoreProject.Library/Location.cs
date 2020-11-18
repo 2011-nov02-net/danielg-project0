@@ -111,18 +111,9 @@ namespace StoreProject.Library
             }
         }
 
-
-        public void PrintOrderHistory()
-        {
-            foreach (var order in orders)
-            {
-                // Add function in order to print its details out.
-
-                
-            }
-        }
-
-
+        /// <summary>
+        /// Take the details of a Location and print them out
+        /// </summary>
         public void PrintDetails()
         {
             Console.WriteLine($"Dumb Mcdonalds in: ({CityLocation}), StoreID: ({Id})");

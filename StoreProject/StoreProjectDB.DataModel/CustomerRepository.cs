@@ -181,7 +181,7 @@ namespace StoreProjectDB.DataModel
                 // Get the Console Location from the DB
                 var tempLocation = GetStoreFromID(order.StoreId);
                 // Add Location and Customer to the order
-                Order tempOrder = new Order(tempLocation, tempCust, order.Id);
+                Order tempOrder = new Order(tempLocation, tempCust, order.Id, order.Date);
                 // Create list of all the aggregateOrders from a store Location 
                 var listAggOrders = context.AggOrders.Where(o => o.OrderId == order.Id);
                 foreach (var agOrder in listAggOrders)
@@ -218,11 +218,6 @@ namespace StoreProjectDB.DataModel
 
             return appLocation;
         }
-
-
-
-
-
 
 
         public Dictionary<string, int> CreateStoreInventory(int storeID)
