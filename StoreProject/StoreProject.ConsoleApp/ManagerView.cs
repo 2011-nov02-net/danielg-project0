@@ -122,7 +122,7 @@ namespace StoreProject
                     foreach (var order in currentLocation.Orders)
                     {
                         decimal orderTotal = order.CalculateTotal(storeProducts);
-                        Console.WriteLine($"Order Number {order.OrderID} by {order.Customer.Name}, with total cost: {orderTotal}. Date: ({order.Date})");
+                        Console.WriteLine($"Order Number {order.OrderID} by {order.Customer.Name}, with total cost: ${orderTotal}. Date: ({order.Date})");
                     }
 
                     // Allow the manager to look at specific products ordered

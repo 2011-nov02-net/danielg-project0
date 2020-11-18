@@ -235,7 +235,7 @@ namespace StoreProject
                         {
                             decimal orderTotal = order.CalculateTotal(storeProducts);
 
-                            Console.WriteLine($"Order Number {order.OrderID} in {order.Location.CityLocation}, with total cost: {orderTotal}. Date: {order.Date}");
+                            Console.WriteLine($"Order Number {order.OrderID} in {order.Location.CityLocation}, with total cost: ${orderTotal}. Date: {order.Date}");
                         }
                         // Allow the customer to look at specific products ordered
                         Console.WriteLine("------------------------------");
