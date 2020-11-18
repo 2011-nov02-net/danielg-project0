@@ -210,7 +210,7 @@ namespace StoreProject
                         // Send the order that the user just made to the database.
                         cusRepo.SendGenOrderToDB(thisOrder);
 
-                        // Push the Order that was made to 
+                 
                         // Stop execution just for a minute(-----------TEMP----------------------)
                         Console.WriteLine("Pause");
                         var read = Console.ReadLine();
@@ -219,6 +219,8 @@ namespace StoreProject
                     // Customer chooses to view their order history
                     if (custChoice == "v")
                     {
+                        // Set the current 
+                        currentCustomer = cusRepo.GetCustomerWithOrders(currentCustomer.Id);
 
                     }
                     // Customer choooses to exit

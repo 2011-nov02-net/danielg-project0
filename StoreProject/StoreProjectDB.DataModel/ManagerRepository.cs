@@ -26,15 +26,19 @@ namespace StoreProjectDB.DataModel
             _contextOptions = contextOptions;
         }
 
-        public List<IOrder> GetStoreOrders(int storeID)
+
+        /// <summary>
+        /// When the manager picks a location to view, call this method to get an entire store.
+        ///     with GenOrders and Inventory.
+        /// </summary>
+        /// <param name="storeID"></param>
+        /// <returns></returns>
+        public Location GetStoreWithOrdersAndInventory(int storeID)
         {
             // Create Context
             using var context = new danielGProj0DBContext(_contextOptions);
             // Get all of the GenOrders from the Database, based on the storeID
-            var generalOrders = context.GenOrders.Where(o => o.StoreId == storeID);
-            // Get all of the AggOrders from the Database, based on storeID
-            var aggOrders = new List<AggOrder>();
-
+            var generalOrders = context.GenOrders.Where(o => o.StoreId == storeID).ToList();
             // Create a list of orders to add to based on the orders to a store
             var aggregatedOrders = new List<IOrder>();
             // for each order to a store, get the details of it.
@@ -45,7 +49,7 @@ namespace StoreProjectDB.DataModel
                 // Get the Console Location from the DB
                 var tempLocation = GetStoreFromID(order.StoreId);
                 // Add Location and Customer to the order
-                Order tempOrder = new Order(tempLocation, tempCust);
+                Order tempOrder = new Order(tempLocation, tempCust, order.Id);
                 // Create list of all the aggregateOrders from a store Location 
                 var listAggOrders = context.AggOrders.Where(o => o.OrderId == order.Id);
                 foreach (var agOrder in listAggOrders)
@@ -54,11 +58,48 @@ namespace StoreProjectDB.DataModel
                     //   Just keep them in memory and move them
                     tempOrder.Customer.ShoppingCart.Add(agOrder.Product, agOrder.Amount);
                 }
+                // Add each order with details to 
                 aggregatedOrders.Add(tempOrder);
             }
-            return aggregatedOrders;
+            // Call CreateStoreWithInventory so I can just return an entire store rather than just the orders to that store.
+            Location chosenLocation = CreateStoreWithInventory(storeID);
+            // Add the list of previous orders to that store
+            chosenLocation.Orders = aggregatedOrders;
+            return chosenLocation;
         }
 
+
+
+        /// <summary>
+        /// Create console app store, from the database. Complete with inventory.
+        /// </summary>
+        /// <param name="storeID"></param>
+        /// <returns></returns>
+        public Location CreateStoreWithInventory(int storeID)
+        {
+            // Create empty dictionary to fill in inventory
+            Dictionary<string, int> inventory = new Dictionary<string, int>();
+            // Create Context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Get agg inventory items from the database- this is a stores inventory
+            var itemsInInventory = context.AggInventories.Where(i => i.StoreId == storeID).ToList();
+            // create console inventory with db inventory pieces
+            Dictionary<string, int> inv = itemsInInventory.ToDictionary(i => i.Product, i => i.InStock);
+            // Create store From Store DBtable
+            var dbStore = context.Stores.Where(s => s.Id == storeID);
+            // Create the store in the console. Complete with an inventory
+            var appStore = dbStore.Select(s => new Location(s.Location, s.Id, inv)).ToList();
+
+
+            return appStore.First();
+        }
+
+
+        /// <summary>
+        /// Return a store based on the storeID passed in
+        /// </summary>
+        /// <param name="storeID"></param>
+        /// <returns></returns>
         public Location GetStoreFromID(int storeID)
         {
             // Create Context
@@ -104,6 +145,19 @@ namespace StoreProjectDB.DataModel
             CustomerClass appCustomer = new CustomerClass(customer.Name, customer.Id);
 
             return appCustomer;
+        }
+
+        public List<StoreProject.Library.Product> GetProducts()
+        {
+            // Create context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Get the product names and prices- these two methods just make the "products"
+            //  that are the key in the dictionary
+            var dbProducts = context.Products.ToList();
+            // Make the list of products into an a list of app products
+            var appProducts = dbProducts.Select(p => new StoreProject.Library.Product(p.Name, p.Price)).ToList();
+
+            return appProducts;
         }
 
     }

@@ -13,7 +13,7 @@ namespace StoreProject.Library
         /// </summary>
         private string _city;
         private Dictionary<string, int> _inventory;
-        private List<int> orders;
+        private List<IOrder> orders;
 
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace StoreProject.Library
         {
             City = city;
             Inventory = inventory;
-            Orders = new List<int>();
+            Orders = new List<IOrder>();
         }
 
 
@@ -61,7 +61,7 @@ namespace StoreProject.Library
         /// <summary>
         /// Property to get and set the Orders list
         /// </summary>
-        public List<int> Orders { get => orders; set => orders = value; }
+        public List<IOrder> Orders { get => orders; set => orders = value; }
 
         /// <summary>
         /// Generated property to set the city of a Store

@@ -23,9 +23,12 @@ namespace StoreProject
         /// Property to get/set the Customer of an order8=
         /// </summary>
         public CustomerClass Customer { get; set; }
-        //public IDictionary<string, int> CurrentOrder { get; set; }
+        /// <summary>
+        /// Property to get/set the ID of an order
+        /// </summary>
+        public int OrderID { get; set; }
 
-        public void CalculateTotal(List<Product> products);
+        public decimal CalculateTotal(List<Product> products);
 
     }
 }

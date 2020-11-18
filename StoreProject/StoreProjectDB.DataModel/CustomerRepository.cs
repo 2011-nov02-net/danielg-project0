@@ -5,6 +5,7 @@ using StoreProject.Library.Customer;
 using System.Linq;
 using StoreProject.Library;
 using StoreProject;
+using StoreProject.Library.Order;
 
 namespace StoreProjectDB.DataModel
 {
@@ -23,6 +24,8 @@ namespace StoreProjectDB.DataModel
         {
             _contextOptions = contextOptions;
         }
+
+        
 
 
         public List<CustomerClass> GetAllCustomers()
@@ -145,7 +148,11 @@ namespace StoreProjectDB.DataModel
 
         }
 
-
+        /// <summary>
+        /// Return a Console customer based on an int passed in from the customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public CustomerClass GetCustomerFromID(int id)
         {
             // Create Context
@@ -157,6 +164,65 @@ namespace StoreProjectDB.DataModel
 
             return appCustomer;
         }
+
+        public CustomerClass GetCustomerWithOrders(int custID)
+        {
+            // Create Context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Get all of the GenOrders from the Database, based on the storeID
+            var generalOrders = context.GenOrders.Where(o => o.CustomerId == custID).ToList();
+            // Create a list of orders to add to based on the orders to a store
+            var aggregatedOrders = new List<IOrder>();
+            // for each order to a store, get the details of it.
+            foreach (var order in generalOrders)
+            {
+                // Get the Console Customer from the DB
+                var tempCust = GetCustomerFromID(order.CustomerId);
+                // Get the Console Location from the DB
+                var tempLocation = GetStoreFromID(order.StoreId);
+                // Add Location and Customer to the order
+                Order tempOrder = new Order(tempLocation, tempCust, order.Id);
+                // Create list of all the aggregateOrders from a store Location 
+                var listAggOrders = context.AggOrders.Where(o => o.OrderId == order.Id);
+                foreach (var agOrder in listAggOrders)
+                {
+                    // Add the aggregateOrders essentially as orders being placed so I can
+                    //   Just keep them in memory and move them
+                    tempOrder.Customer.ShoppingCart.Add(agOrder.Product, agOrder.Amount);
+                }
+                // Add each order with details to 
+                aggregatedOrders.Add(tempOrder);
+            }
+            // Call GetCustomer From Id passing in the customer id that was searched for
+            CustomerClass customerHere = GetCustomerFromID(custID);
+            // Add the list of customers orders to the console customer
+            customerHere.CustomersOrders = aggregatedOrders;
+
+            return customerHere;
+        }
+
+
+        /// <summary>
+        /// Return a store based on the storeID passed in
+        /// </summary>
+        /// <param name="storeID"></param>
+        /// <returns></returns>
+        public Location GetStoreFromID(int storeID)
+        {
+            // Create Context
+            using var context = new danielGProj0DBContext(_contextOptions);
+            // Get "Stores" based on ID
+            var dbStore = context.Stores.Where(s => s.Id == storeID).First();
+            // Convert DBStore into Console Store
+            Location appLocation = new Location(dbStore.Location, dbStore.Id);
+
+            return appLocation;
+        }
+
+
+
+
+
 
 
         public Dictionary<string, int> CreateStoreInventory(int storeID)

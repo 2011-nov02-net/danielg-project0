@@ -10,17 +10,23 @@ namespace StoreProject
 {
     public class ManagerView
     {
-        /// <summary>
-        /// Create a List field to fill with locations the manager can view
-        /// </summary>
-        List<Location> locations;
+
         /// <summary>
         /// Creating the field that I will assign the Manager Repository with
         ///     Context options to
         /// </summary>
         private ManagerRepository manRepo;
 
-        
+        /// <summary>
+        /// When the manager picka a location, this field will get filled with orders and
+        /// an inventory that the manager can look at
+        /// </summary>
+        Location currentLocation;
+
+        /// <summary>
+        /// Get list of all of the products a store sells
+        /// </summary>
+        List<Library.Product> storeProducts;
 
         /// <summary>
         /// Constructor passing in dbcontextoptions so I can create a Manager Repository
@@ -51,6 +57,11 @@ namespace StoreProject
                 Console.WriteLine("Exit to Main Screen: (x)");
 
                 var input = Console.ReadLine();
+
+                if (input == "x")
+                {
+                    break;
+                }
                 // If user wants to view locations
                 if (input == "v")
                 {
@@ -68,73 +79,77 @@ namespace StoreProject
 
                     Console.WriteLine("------------------------------------------------");
                     // Let user view location orders or exit to all locations
-                    Console.WriteLine("Type in a city to view past orders, or exit(x): ");
+                    Console.WriteLine("Type in a StoreID to view, or exit(x): ");
 
+                    // Get manager choice of store to view.
                     var city = Console.ReadLine();
-                    if (city == "boston")
+
+                    if (city == "x")
                     {
-                        Location result;
-                        try
-                        {
-                            result = (Location)(from l in locations where l.City == "Boston" select l);
-                            var orders = result.Orders;
-                            foreach (var order in orders)
-                            {
-                                //Add function in Location class to print out order history
-                            }
-                        }
-                        catch(Exception e)
-                        {
-                            Console.WriteLine("Location not found, Error Message: " + e.Message);
-                        }
-             
-                        
+                        break;
                     }
-                    if (city == "new york")
+
+
+                    int storeID = 0;
+                    int storeCount = manRepo.GetNumberOfStores();
+
+                    // Try to parse the string taken from the customer into an int
+                    try
                     {
-                        Location result;
-                        try
-                        {
-                            result = (Location)(from l in locations where l.City == "New York" select l);
-                            var orders = result.Orders;
-                            foreach (var order in orders)
-                            {
-                                //Add function in Location class to print out order history
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine("Location not found, Error Message: " + e.Message);
-                        }
-
-
+                        storeID = int.Parse(city);
                     }
-                    if (city == "norwich")
+                    catch (InvalidCastException)
                     {
-                        Location result;
-                        try
-                        {
-                            result = (Location)(from l in locations where l.City == "Boston" select l);
-                            var orders = result.Orders;
-                            foreach (var order in orders)
-                            {
-                                //Add function in Location class to print out order history
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine("Location not found, Error Message: " + e.Message);
-                        }
-
-
+                        Console.WriteLine("Please Enter a Valid ID");
+                        city = Console.ReadLine();
                     }
-                }
-                else if (input == "x")
-                {
-                    break;
+
+                    // If storeID that customer provides is not valid, make them re-enter it.
+                    if ((storeID < 1) || (storeID > storeCount))
+                    {
+                        Console.WriteLine("Please Enter a Valid Store ID: ");
+                        city = Console.ReadLine();
+                    }
+                    // Get the storeID and turn it into an int
+                    storeID = int.Parse(city);
+                    // Get the list of orderd based on the store the manager wanted to see
+                    currentLocation = manRepo.GetStoreWithOrdersAndInventory(storeID);
+
+                    // Set the list of all of the products a store sells
+                    storeProducts = manRepo.GetProducts();
+                    Console.WriteLine("------------------------------------------");
+                    Console.WriteLine($"Viewing Location: {currentLocation.CityLocation}");
+                    foreach (var order in currentLocation.Orders)
+                    {
+                        decimal orderTotal = order.CalculateTotal(storeProducts);
+                        Console.WriteLine($"Order Number {order.OrderID} by {order.Customer.Name}, with total cost: {orderTotal}");
+                    }
+                    // Allow the manager to look at specific products ordered
+                    Console.WriteLine("----------------------");
+                    Console.WriteLine("Pick an order to view, or exit");
+                    var orderToView = Console.ReadLine();
+
+                    if (orderToView == "x")
+                    {
+                        break;
+                    }
+                    // Make the int that I will set the order chosen to view
+                    int orderIDHere = 0;
+                    // Parse that int
+                    orderIDHere = int.Parse(orderToView);
+                    // Find the order that the manager chose to view the details of
+                    var orderChosen = currentLocation.Orders.Find(o => o.OrderID == orderIDHere);
+                    foreach (var product in orderChosen.Customer.ShoppingCart)
+                    {
+                        //
+                        Console.WriteLine($"Product: {product.Key}, Amount: ({product.Value}) ");
+                    }
+                    Console.WriteLine("Enter any key to return to main menu: ");
+                    Console.ReadLine();
                 }
 
             }
         }
     }
 }
+

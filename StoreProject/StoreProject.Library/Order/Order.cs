@@ -13,7 +13,7 @@ namespace StoreProject.Library.Order
         private CustomerClass _customer;
         private DateTime date;
         private decimal cost;
-
+        private int _orderID;
 
         /// <summary>
         /// Constructor used to create an order
@@ -26,6 +26,18 @@ namespace StoreProject.Library.Order
             
         }
 
+
+        /// <summary>
+        /// Constructor used to create an order
+        /// </summary>
+        public Order(Location location, CustomerClass customer, int orderID)
+        {
+            Location = location;
+            Customer = customer;
+            Date = DateTime.Now;
+            OrderID = orderID;
+
+        }
 
         /// <summary>
         /// roperty to get or set the location of an order
@@ -47,12 +59,16 @@ namespace StoreProject.Library.Order
         /// Property to get or set the cost of the order
         /// </summary>
         public decimal Cost { get => cost; set => cost = value; }
+        /// <summary>
+        /// OrderID property to get or set the value
+        /// </summary>
+        public int OrderID { get => _orderID; set => _orderID = value; }
 
 
         /// <summary>
         /// Calculate the total of an order, pass in the list of prodcuts from the database
         /// </summary>
-        public void CalculateTotal(List<Product> products)
+        public decimal CalculateTotal(List<Product> products)
         {
             decimal orderTotal = 0.00M;
             // Get a dictionary of products and prices and get a dictionary of currentorder
@@ -69,7 +85,8 @@ namespace StoreProject.Library.Order
                 orderTotal += (priceOfProduct *= product.Value);
             }
             // Set the cost in this class to the sum of all of the products and prices
-            Cost = orderTotal;
+
+            return orderTotal;
         }
 
 
