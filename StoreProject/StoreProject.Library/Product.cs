@@ -23,5 +23,6 @@ namespace StoreProject.Library
         /// Public property to get or set the price of a product
         /// </summary>
         public decimal Price { get => _price; set => _price = value; }
+
     }
 }

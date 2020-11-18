@@ -38,6 +38,18 @@ namespace StoreProject.Library.Order
             OrderID = orderID;
 
         }
+        /// <summary>
+        /// Constructor to help test methods
+        /// </summary>
+        public Order()
+        {
+            Customer = new CustomerClass();
+        }
+
+        public Order(CustomerClass customer)
+        {
+            Customer = customer;
+        }
 
         /// <summary>
         /// roperty to get or set the location of an order
@@ -87,6 +99,23 @@ namespace StoreProject.Library.Order
             // Set the cost in this class to the sum of all of the products and prices
 
             return orderTotal;
+        }
+
+        /// <summary>
+        /// Using method logic to test out methods on class
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public int CalaculateTotalOfOneProduct(Product prod)
+        {
+            var dict = Customer.ShoppingCart;
+            int amt = dict[prod.ProductName];
+            return (int)(prod.Price *= amt);
+        }
+
+        public void AddToCustomerCart(Product product, int amountOrderd)
+        {
+            Customer.ShoppingCart.Add(product.ProductName, amountOrderd);
         }
 
         /// <summary>

@@ -19,7 +19,16 @@ namespace StoreProject.Library.Customer
         public CustomerClass(string name)
         {
             Name = name;
-     
+
+        }
+
+        /// <summary>
+        /// Constructor to help test methods
+        /// </summary>
+        /// <param name="dict"></param>
+        public CustomerClass(Dictionary<string, int> dict)
+        {
+            shoppingCart = dict;
         }
 
         /// <summary>
@@ -32,6 +41,11 @@ namespace StoreProject.Library.Customer
             Id = id;
             ShoppingCart = new Dictionary<string, int>();
             CustomersOrders = new List<IOrder>();
+        }
+
+        public CustomerClass()
+        {
+            ShoppingCart = new Dictionary<string, int>();
         }
 
         /// <summary>
