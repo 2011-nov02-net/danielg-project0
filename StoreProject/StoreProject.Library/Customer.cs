@@ -90,11 +90,5 @@ namespace StoreProject.Library.Customer
             ShoppingCart.Add(productName, amountDesired);
             return true;
         }
-
-
-        public IEnumerable<IOrder> RecallOrders(string id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
