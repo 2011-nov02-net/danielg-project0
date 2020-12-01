@@ -274,7 +274,9 @@ namespace StoreProject
                         Console.WriteLine("------------------------------");
                         Console.WriteLine("Pick an order to view, or exit");
                         Console.WriteLine("------------------------------");
-                        var orderToView = Console.ReadLine();
+
+
+                   var orderToView = Console.ReadLine();
 
                         if (orderToView == "x")
                         {
